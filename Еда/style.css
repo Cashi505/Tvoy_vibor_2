@@ -90,7 +90,7 @@ em { font-style: italic; }
 }
 .section-header {
     text-align: center;
-    margin-bottom: clamp(1.8rem, 3.5vw, 3rem);
+    margin-bottom: clamp(2.5rem, 6vw, 5rem);
 }
 .section-header .section-sub { margin: 0 auto; }
 
@@ -261,15 +261,15 @@ em { font-style: italic; }
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     background:
-        linear-gradient(to right, rgba(244,248,245,0.82) 0%, rgba(244,248,245,0.55) 48%, rgba(244,248,245,0.08) 100%),
-        linear-gradient(to bottom, rgba(244,248,245,0.08) 0%, transparent 20%, transparent 62%, rgba(244,248,245,0.72) 100%);
+        linear-gradient(to right, rgba(244,248,245,0.96) 0%, rgba(244,248,245,0.82) 48%, rgba(244,248,245,0.18) 100%),
+        linear-gradient(to bottom, rgba(244,248,245,0.18) 0%, transparent 20%, transparent 62%, rgba(244,248,245,0.88) 100%);
 }
 .hero-content {
     position: relative;
     z-index: 2;
     max-width: 900px;
-    padding-top: 7rem;
-    padding-bottom: 5rem;
+    padding-top: 9rem;
+    padding-bottom: 7rem;
 }
 .hero-tag {
     font-size: 0.72rem;
@@ -314,7 +314,7 @@ em { font-style: italic; }
    ============================================ */
 .stats {
     background: var(--bg-section);
-    padding: clamp(2rem, 4vw, 3.5rem) 0;
+    padding: clamp(3rem, 6vw, 5rem) 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
@@ -361,7 +361,7 @@ em { font-style: italic; }
    ABOUT
    ============================================ */
 .about {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
 }
 .about-grid {
     display: grid;
@@ -419,7 +419,7 @@ em { font-style: italic; }
    ============================================ */
 .programs {
     background: var(--bg-section);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
 }
 .programs-grid {
     display: grid;
@@ -532,7 +532,7 @@ em { font-style: italic; }
    HOW IT WORKS
    ============================================ */
 .how {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
 }
 .steps-grid {
     display: grid;
@@ -591,7 +591,7 @@ em { font-style: italic; }
    ============================================ */
 .calculator {
     background: var(--bg-section);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
 }
 .calc-form {
     max-width: 760px;
@@ -778,7 +778,7 @@ em { font-style: italic; }
    WEEKLY SCHEDULE (MENU SECTION)
    ============================================ */
 .sched-section {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
     background: var(--bg-dark);
 }
 
@@ -1116,7 +1116,7 @@ em { font-style: italic; }
    ============================================ */
 .cta-section {
     position: relative;
-    padding: clamp(3.5rem, 7vw, 6rem) 0;
+    padding: clamp(6rem, 12vw, 10rem) 0;
     overflow: hidden;
 }
 .cta-bg {
@@ -1196,7 +1196,7 @@ em { font-style: italic; }
 .footer {
     background: var(--bg-section);
     border-top: 1px solid var(--border);
-    padding: clamp(2rem, 4vw, 3.5rem) 0 2rem;
+    padding: clamp(3rem, 6vw, 5rem) 0 2rem;
 }
 .footer-grid {
     display: grid;
@@ -1332,7 +1332,12 @@ em { font-style: italic; }
     .logo-img { height: 40px; }
 
     /* Hero */
-    .hero-content { max-width: 100%; padding-top: 5.5rem; padding-bottom: 3.5rem; }
+    .hero-content { max-width: 100%; padding-top: 7rem; padding-bottom: 5rem; }
+    .hero-overlay {
+        background:
+            rgba(244,248,245,0.91),
+            linear-gradient(to bottom, rgba(244,248,245,0.12) 0%, transparent 20%, transparent 65%, rgba(244,248,245,0.92) 100%);
+    }
 
     /* Grids */
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1470,15 +1475,21 @@ body::after {
 }
 
 /* ============================================
-   VARIANT 5 — Hero & CTA text stays white
-   (overlay backgrounds are hardcoded dark over video)
+   VARIANT 5 — Hero: light overlay, dark text
+   CTA: dark overlay (video), white text stays
    ============================================ */
-.hero-title        { color: #F0EBE0; }
-.hero-title em     { color: #2EA868; }
-.hero-tag          { color: #2EA868; }
-.hero-sub          { color: rgba(240,235,224,0.80); }
-.hero .btn-ghost   { color: #F0EBE0; border-color: rgba(255,255,255,0.22); }
-.hero .btn-ghost:hover { border-color: rgba(255,255,255,0.60); }
+.hero-title        { color: var(--text-primary); }
+.hero-title em     {
+    background: linear-gradient(125deg, var(--green) 0%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+.hero-tag          { color: var(--gold); }
+.hero-sub          { color: var(--text-secondary); }
+.hero .btn-ghost   { color: var(--text-primary); border-color: rgba(0,0,0,0.20); }
+.hero .btn-ghost:hover { border-color: rgba(0,0,0,0.50); }
 .cta-title         { color: #F0EBE0; }
 .cta-title em      { color: #2EA868; }
 .cta-sub           { color: rgba(240,235,224,0.82); }
@@ -1563,7 +1574,7 @@ body::after {
    ============================================ */
 .faq {
     background: var(--bg-dark);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
 }
 
 .faq-list {
@@ -1660,7 +1671,7 @@ body::after {
    ============================================ */
 .contacts {
     background: var(--bg-section);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0;
     border-top: 1px solid var(--border);
 }
 
