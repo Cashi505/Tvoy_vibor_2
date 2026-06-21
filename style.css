@@ -1470,15 +1470,21 @@ body::after {
 }
 
 /* ============================================
-   VARIANT 5 — Hero & CTA text stays white
-   (overlay backgrounds are hardcoded dark over video)
+   VARIANT 5 — Hero: light overlay, dark text
+   CTA: dark overlay (video), white text stays
    ============================================ */
-.hero-title        { color: #F0EBE0; }
-.hero-title em     { color: #2EA868; }
-.hero-tag          { color: #2EA868; }
-.hero-sub          { color: rgba(240,235,224,0.80); }
-.hero .btn-ghost   { color: #F0EBE0; border-color: rgba(255,255,255,0.22); }
-.hero .btn-ghost:hover { border-color: rgba(255,255,255,0.60); }
+.hero-title        { color: #1A2A1E; }
+.hero-title em     {
+    background: linear-gradient(125deg, #0E5C34 0%, #1D8C55 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+.hero-tag          { color: #1D8C55; }
+.hero-sub          { color: #2D4538; }
+.hero .btn-ghost   { color: #1A2A1E; border-color: rgba(0,0,0,0.32); }
+.hero .btn-ghost:hover { border-color: rgba(0,0,0,0.60); }
 .cta-title         { color: #F0EBE0; }
 .cta-title em      { color: #2EA868; }
 .cta-sub           { color: rgba(240,235,224,0.82); }
