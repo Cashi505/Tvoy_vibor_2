@@ -240,8 +240,8 @@ em { font-style: italic; }
    ============================================ */
 .hero {
     position: relative;
-    min-height: 100vh;
-    min-height: 100svh; /* Safari 15.4+ */
+    min-height: 88vh;
+    min-height: 88svh; /* Safari 15.4+ */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -268,8 +268,8 @@ em { font-style: italic; }
     position: relative;
     z-index: 2;
     max-width: 900px;
-    padding-top: 7rem;
-    padding-bottom: 5rem;
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
 }
 .hero-tag {
     font-size: 0.72rem;
@@ -361,7 +361,7 @@ em { font-style: italic; }
    ABOUT
    ============================================ */
 .about {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
 }
 .about-grid {
     display: grid;
@@ -419,7 +419,7 @@ em { font-style: italic; }
    ============================================ */
 .programs {
     background: var(--bg-section);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
 }
 .programs-grid {
     display: grid;
@@ -532,7 +532,7 @@ em { font-style: italic; }
    HOW IT WORKS
    ============================================ */
 .how {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
 }
 .steps-grid {
     display: grid;
@@ -591,7 +591,7 @@ em { font-style: italic; }
    ============================================ */
 .calculator {
     background: var(--bg-section);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
 }
 .calc-form {
     max-width: 760px;
@@ -778,7 +778,7 @@ em { font-style: italic; }
    WEEKLY SCHEDULE (MENU SECTION)
    ============================================ */
 .sched-section {
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
     background: var(--bg-dark);
 }
 
@@ -1116,7 +1116,7 @@ em { font-style: italic; }
    ============================================ */
 .cta-section {
     position: relative;
-    padding: clamp(3.5rem, 7vw, 6rem) 0;
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
     overflow: hidden;
 }
 .cta-bg {
@@ -1332,7 +1332,7 @@ em { font-style: italic; }
     .logo-img { height: 40px; }
 
     /* Hero */
-    .hero-content { max-width: 100%; padding-top: 5.5rem; padding-bottom: 3.5rem; }
+    .hero-content { max-width: 100%; padding-top: 4rem; padding-bottom: 2.5rem; }
 
     /* Grids */
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1569,7 +1569,7 @@ body::after {
    ============================================ */
 .faq {
     background: var(--bg-dark);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
 }
 
 .faq-list {
@@ -1666,7 +1666,7 @@ body::after {
    ============================================ */
 .contacts {
     background: var(--bg-section);
-    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    padding: clamp(1.8rem, 3.5vw, 3rem) 0;
     border-top: 1px solid var(--border);
 }
 
