@@ -2890,122 +2890,120 @@ body::after { opacity: 0.062; }
     gap: 1rem;
     border-left: 1px solid var(--border);
 }
-.prog-pricing-label {
-    font-size: 0.67rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+/* Step labels */
+.prog-step-wrap { margin-bottom: 1.3rem; }
+.prog-step-label {
+    font-size: 0.8rem;
     color: var(--text-muted);
+    margin: 0 0 0.75rem;
 }
-.prog-prices {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.7rem;
-    flex-grow: 1;
-}
+.prog-step-label span { color: var(--green); font-weight: 700; }
 
-/* Price cards */
-.price-card {
+/* ── Step 2: sub-programs ── */
+.prog-subs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.prog-sub-card {
     border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 1rem 1rem 0.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    text-decoration: none;
+    padding: 0.75rem 1.2rem;
     cursor: pointer;
     transition: all 0.22s var(--ease);
+    background: #FFFFFF;
+    min-width: 155px;
+    text-align: left;
+}
+.prog-sub-card:hover { border-color: var(--green); }
+.prog-sub-card.active { border-color: var(--green); background: rgba(36,180,98,0.06); }
+.prog-sub-cat { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.15rem; }
+.prog-sub-name { font-size: 0.88rem; font-weight: 700; color: var(--green); line-height: 1.2; margin-bottom: 0.1rem; }
+.prog-sub-kcal { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ── Duration cards (horizontal scroll) ── */
+.prog-durations {
+    display: flex;
+    gap: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0.25rem 0.1rem 0.5rem;
+}
+.prog-durations::-webkit-scrollbar { display: none; }
+.dur-card {
+    flex: 0 0 auto;
+    min-width: 85px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.7rem 0.65rem;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    background: #FFFFFF;
+    text-align: center;
     position: relative;
-    background: #FAFFFE;
-}
-.price-card:hover {
-    border-color: var(--green);
-    background: rgba(36,180,98,0.04);
-    box-shadow: 0 4px 20px rgba(36,180,98,0.14);
-    transform: translateY(-2px);
-}
-.price-card--popular {
-    border-color: var(--green);
-    background: rgba(36,180,98,0.05);
-}
-.price-card-badge {
-    position: absolute;
-    top: -10px; right: 10px;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    background: var(--green);
-    padding: 0.18rem 0.55rem;
-    border-radius: 50px;
-}
-.price-card-label {
-    font-size: 0.78rem;
-    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.12rem;
     color: var(--text-primary);
-    line-height: 1.2;
 }
-.price-card-days {
-    font-size: 0.66rem;
-    color: var(--text-muted);
-    margin-bottom: 0.3rem;
-}
-.price-card-price {
+.dur-card:hover { border-color: var(--green); background: rgba(36,180,98,0.04); }
+.dur-card.active { background: var(--green); border-color: var(--green); color: #FFFFFF; }
+.dur-card-label { font-size: 0.68rem; font-weight: 700; line-height: 1.2; color: inherit; }
+.dur-card-bonus { font-size: 0.57rem; color: var(--green); font-weight: 600; }
+.dur-card.active .dur-card-bonus { color: rgba(255,255,255,0.85); }
+.dur-card-old { font-size: 0.57rem; text-decoration: line-through; opacity: 0.45; color: inherit; }
+.dur-card-price {
     font-family: var(--font-display);
-    font-size: 1.55rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    color: var(--text-primary);
     line-height: 1;
+    color: inherit;
+    margin-top: 0.18rem;
 }
-.price-card-per {
-    font-size: 0.68rem;
-    color: var(--text-muted);
-}
-.price-card-discount {
-    font-size: 0.62rem;
+.dur-card-per { font-size: 0.55rem; opacity: 0.68; color: inherit; line-height: 1.3; }
+.dur-badge {
+    position: absolute;
+    top: -9px; right: -6px;
+    font-size: 0.52rem;
     font-weight: 700;
-    color: var(--green);
-    background: rgba(36,180,98,0.12);
-    padding: 0.12rem 0.4rem;
+    color: #FFFFFF;
+    background: #E85D0A;
+    padding: 0.14rem 0.38rem;
     border-radius: 50px;
-    display: inline-block;
-    width: fit-content;
-    margin-top: 0.15rem;
+    white-space: nowrap;
+}
+.dur-card.active .dur-badge { background: rgba(0,0,0,0.22); }
+.dur-card-discount { font-size: 0.52rem; font-weight: 700; color: #E85D0A; }
+.dur-card.active .dur-card-discount { color: rgba(255,255,255,0.9); }
+
+/* ИТОГО */
+.prog-total {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    padding: 0.85rem 0 0.15rem;
+    border-top: 1px solid var(--border);
+}
+.prog-total span {
+    color: var(--green);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
 }
 
-/* CTA at bottom of right panel */
-.prog-order-btn {
-    width: 100%;
-    text-align: center;
-    padding: 0.85rem;
-    font-size: 0.9rem;
-}
-.prog-order-note {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    text-align: center;
-    margin: 0;
-}
+/* CTA */
+.prog-order-btn { width: 100%; text-align: center; padding: 0.9rem; font-size: 0.95rem; }
 
 /* Responsive */
 @media (max-width: 960px) {
-    .prog-panel {
-        grid-template-columns: 1fr;
-    }
-    .prog-panel-right {
-        padding: 1.5rem;
-        border-left: none;
-        border-top: 1px solid var(--border);
-    }
+    .prog-panel { grid-template-columns: 1fr; }
+    .prog-panel-right { padding: 1.5rem; border-left: none; border-top: 1px solid var(--border); }
     .prog-panel-photo { aspect-ratio: 16/7; }
 }
 @media (max-width: 640px) {
-    .prog-goals { gap: 0.45rem; }
-    .prog-goal { padding: 0.55rem 0.95rem; }
-    .prog-goal-title { font-size: 0.8rem; }
-    .prog-goal-sub { font-size: 0.6rem; }
-    .prog-prices { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
-    .price-card { padding: 0.85rem 0.8rem; }
-    .price-card-price { font-size: 1.3rem; }
+    .prog-goals { gap: 0.42rem; }
+    .prog-goal { padding: 0.5rem 0.8rem; }
+    .prog-goal-title { font-size: 0.76rem; }
+    .prog-goal-sub { font-size: 0.57rem; }
+    .dur-card { min-width: 76px; padding: 0.62rem 0.55rem; }
+    .dur-card-price { font-size: 1rem; }
 }

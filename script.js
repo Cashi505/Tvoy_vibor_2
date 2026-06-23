@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    SCROLL REVEAL — Intersection Observer
    ============================================ */
 const revealObserver = new IntersectionObserver(
@@ -686,124 +686,203 @@ if (scrollProgress) {
     });
 })();
 
+
 /* ============================================
    INTERACTIVE PROGRAMS + PRICING
    ============================================ */
 (function() {
-    // ━━━ ЦЕНЫ — обновите здесь ━━━━━━━━━━━━━━
-    const PROG_DATA = [
+    const GOALS = [
         {
-            name: 'Похудение', kcal: '900 ккал / день', tag: 'Для похудения',
-            photo: 'images/menu/tuna-salad.jpeg',
-            desc: 'Дефицит калорий, высокое содержание белка, минимум простых углеводов. Минус 2 кг в неделю.',
-            perks: ['Расчёт по вашему КБЖУ', 'Контроль порций', 'Без чувства голода'],
-            prices: [
-                { label: 'Пробный',  days: '2 дня',   price: 1400,  perDay: 700  },
-                { label: '1 неделя', days: '5 дней',  price: 3200,  perDay: 640, discount: 9  },
-                { label: '2 недели', days: '10 дней', price: 5800,  perDay: 580, discount: 17, popular: true },
-                { label: '1 месяц',  days: '22 дня',  price: 10900, perDay: 495, discount: 29 },
+            name: 'Снижение веса', sub: 'от 900 ккал',
+            programs: [
+                {
+                    name: 'Экспресс фигура', kcal: '900 ккал / день', tag: 'Снижение веса',
+                    photo: 'images/menu/tuna-salad.jpeg',
+                    desc: 'Дефицит калорий с высоким содержанием белка. Минус 2 кг в неделю без чувства голода.',
+                    perks: ['Расчёт по вашему КБЖУ', 'Контроль порций', 'Без чувства голода'],
+                    prices: [
+                        { label: 'Пробный рацион', days: '1 день',  price: 790,   perDay: 790,  trial: true },
+                        { label: '1 день',         days: '1 день',  price: 1250,  perDay: 1250 },
+                        { label: '5 дней',         days: '5 дней',  price: 6000,  perDay: 1200, discount: true },
+                        { label: '7 дней',         days: '7 дней',  price: 8350,  perDay: 1193, discount: true },
+                        { label: '14 дней',        days: '14 дней', price: 16300, perDay: 1164, bonus: '+2 дня', discount: true },
+                        { label: '30 дней',        days: '30 дней', price: 34500, perDay: 1150, oldPrice: 36500, discountPct: 4 },
+                    ]
+                },
+                {
+                    name: 'Коррекция фигуры', kcal: '1 400 ккал / день', tag: 'Снижение веса',
+                    photo: 'images/menu/chicken-breast.jpeg',
+                    desc: 'Более мягкое снижение веса с хорошей сытостью. Подходит при активном образе жизни.',
+                    perks: ['Полноценные 4-5 приёмов', 'Без срывов', 'Долгосрочный результат'],
+                    prices: [
+                        { label: '1 день',  days: '1 день',  price: 1300,  perDay: 1300 },
+                        { label: '5 дней',  days: '5 дней',  price: 6250,  perDay: 1250, oldPrice: 6500, discount: true },
+                        { label: '7 дней',  days: '7 дней',  price: 8650,  perDay: 1236, discount: true },
+                        { label: '14 дней', days: '14 дней', price: 16950, perDay: 1211, bonus: '+2 дня', discount: true },
+                        { label: '30 дней', days: '30 дней', price: 35900, perDay: 1197, oldPrice: 39500 },
+                    ]
+                },
             ]
         },
         {
-            name: 'Поддержание', kcal: '1 200 ккал / день', tag: 'Для поддержания',
-            photo: 'images/menu/oatmeal-berries.jpeg',
-            desc: 'Сбалансированный рацион для тех, кто уже достиг нужного веса и хочет его удержать.',
-            perks: ['Полный набор нутриентов', '4 недели разных блюд', 'Лёгкость и энергия'],
-            prices: [
-                { label: 'Пробный',  days: '2 дня',   price: 1800,  perDay: 900  },
-                { label: '1 неделя', days: '5 дней',  price: 4100,  perDay: 820, discount: 9  },
-                { label: '2 недели', days: '10 дней', price: 7400,  perDay: 740, discount: 18, popular: true },
-                { label: '1 месяц',  days: '22 дня',  price: 14200, perDay: 645, discount: 28 },
+            name: 'Не хочу готовить', sub: 'от 1 200 ккал',
+            programs: [
+                {
+                    name: '3 разовое питание', kcal: '1 200 ккал / день', tag: 'Не хочу готовить',
+                    photo: 'images/menu/oatmeal-berries.jpeg',
+                    desc: 'Завтрак, обед и ужин от наших поваров каждый день. Просто, вкусно, удобно.',
+                    perks: ['3 приёма пищи в день', 'Разнообразное меню', 'Без готовки'],
+                    prices: [
+                        { label: '1 день',  days: '1 день',  price: 1150,  perDay: 1150 },
+                        { label: '5 дней',  days: '5 дней',  price: 5500,  perDay: 1100, discount: true },
+                        { label: '7 дней',  days: '7 дней',  price: 7650,  perDay: 1093, discount: true },
+                        { label: '14 дней', days: '14 дней', price: 15000, perDay: 1071, bonus: '+2 дня', discount: true },
+                        { label: '30 дней', days: '30 дней', price: 31200, perDay: 1040, discount: true },
+                    ]
+                },
             ]
         },
         {
-            name: 'Сбалансированное', kcal: '1 800 ккал / день', tag: 'Для всех',
-            photo: 'images/menu/chicken-breast.jpeg',
-            desc: 'Идеальный баланс для активного образа жизни. Вкусно, сытно и полезно каждый день.',
-            perks: ['Подходит большинству', 'Разнообразное меню', 'Для спортивного режима'],
-            prices: [
-                { label: 'Пробный',  days: '2 дня',   price: 2400,  perDay: 1200  },
-                { label: '1 неделя', days: '5 дней',  price: 5400,  perDay: 1080, discount: 10 },
-                { label: '2 недели', days: '10 дней', price: 9800,  perDay: 980,  discount: 18, popular: true },
-                { label: '1 месяц',  days: '22 дня',  price: 18700, perDay: 850,  discount: 29 },
+            name: 'Баланс', sub: 'от 1 800 ккал',
+            programs: [
+                {
+                    name: 'Будь в форме', kcal: '1 800 ккал / день', tag: 'Баланс',
+                    photo: 'images/menu/chicken-breast.jpeg',
+                    desc: 'Идеальный баланс белков, жиров и углеводов для активного образа жизни каждый день.',
+                    perks: ['Подходит большинству', '4-5 приёмов пищи', 'Для спортивного режима'],
+                    prices: [
+                        { label: '1 день',  days: '1 день',  price: 1350,  perDay: 1350 },
+                        { label: '5 дней',  days: '5 дней',  price: 6500,  perDay: 1300, discount: true },
+                        { label: '7 дней',  days: '7 дней',  price: 9000,  perDay: 1286, discount: true },
+                        { label: '14 дней', days: '14 дней', price: 17600, perDay: 1257, discount: true },
+                        { label: '30 дней', days: '30 дней', price: 37300, perDay: 1243, oldPrice: 40500, bonus: '+6 дней', discountPct: 8 },
+                    ]
+                },
+                {
+                    name: 'Всегда в форме', kcal: '2 200 ккал / день', tag: 'Баланс',
+                    photo: 'images/menu/beef-steak.jpeg',
+                    desc: 'Усиленный рацион для тех, кто активно тренируется и хочет поддерживать хорошую форму.',
+                    perks: ['Увеличенный объём', 'Для активных людей', 'Разнообразные блюда'],
+                    prices: [
+                        { label: '1 день',  days: '1 день',  price: 1450,  perDay: 1450 },
+                        { label: '5 дней',  days: '5 дней',  price: 7000,  perDay: 1400, discount: true },
+                        { label: '7 дней',  days: '7 дней',  price: 9650,  perDay: 1379, discount: true },
+                        { label: '14 дней', days: '14 дней', price: 18900, perDay: 1350, discount: true },
+                        { label: '30 дней', days: '30 дней', price: 40000, perDay: 1333, oldPrice: 43500, bonus: '+6 дней', discountPct: 8 },
+                    ]
+                },
             ]
         },
         {
-            name: 'Набор массы', kcal: '2 500 ккал / день', tag: 'Для спортсменов',
-            photo: 'images/menu/beef-steak.jpeg',
-            desc: 'Профицит калорий с высоким содержанием белка для роста мышечной массы и силы.',
-            perks: ['Для спортсменов', 'Высокий процент белка', 'Комплексные углеводы'],
-            prices: [
-                { label: 'Пробный',  days: '2 дня',   price: 3000,  perDay: 1500  },
-                { label: '1 неделя', days: '5 дней',  price: 6700,  perDay: 1340, discount: 11 },
-                { label: '2 недели', days: '10 дней', price: 12200, perDay: 1220, discount: 19, popular: true },
-                { label: '1 месяц',  days: '22 дня',  price: 23300, perDay: 1060, discount: 29 },
-            ]
-        },
-        {
-            name: 'Как дома', kcal: '3 000 ккал / день', tag: 'Без ограничений',
-            photo: 'images/menu/chicken-soup.jpeg',
-            desc: 'Домашняя кухня в профессиональном исполнении. Привычные блюда из натуральных продуктов.',
-            perks: ['Уютные блюда', 'Без строгих ограничений', 'Семейные рецепты'],
-            prices: [
-                { label: 'Пробный',  days: '2 дня',   price: 3500,  perDay: 1750  },
-                { label: '1 неделя', days: '5 дней',  price: 7900,  perDay: 1580, discount: 10 },
-                { label: '2 недели', days: '10 дней', price: 14300, perDay: 1430, discount: 18, popular: true },
-                { label: '1 месяц',  days: '22 дня',  price: 27500, perDay: 1250, discount: 29 },
+            name: 'Набор массы', sub: 'от 3 000 ккал',
+            programs: [
+                {
+                    name: 'Масса', kcal: '3 000 ккал / день', tag: 'Набор массы',
+                    photo: 'images/menu/beef-steak.jpeg',
+                    desc: 'Профицит калорий с максимальным содержанием белка для роста мышц и силы.',
+                    perks: ['Для спортсменов', 'Высокий % белка', 'Комплексные углеводы'],
+                    prices: [
+                        { label: '1 день',  days: '1 день',  price: 1750,  perDay: 1750 },
+                        { label: '5 дней',  days: '5 дней',  price: 8500,  perDay: 1700, discount: true },
+                        { label: '7 дней',  days: '7 дней',  price: 11650, perDay: 1664, discount: true },
+                        { label: '14 дней', days: '14 дней', price: 22800, perDay: 1629, discount: true },
+                        { label: '30 дней', days: '30 дней', price: 48300, perDay: 1610, oldPrice: 52500, discountPct: 8 },
+                    ]
+                },
             ]
         },
     ];
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-    const goals  = document.querySelectorAll('.prog-goal');
-    const panel  = document.querySelector('.prog-panel');
-    const photo  = document.getElementById('progPhoto');
-    const tag    = document.getElementById('progTag');
-    const kcalEl = document.getElementById('progKcal');
-    const descEl = document.getElementById('progDesc');
-    const perksEl= document.getElementById('progPerks');
-    const pricesEl= document.getElementById('progPrices');
+    const goalBtns = document.querySelectorAll('.prog-goal');
+    const step2    = document.getElementById('progStep2');
+    const subsEl   = document.getElementById('progSubs');
+    const panel    = document.querySelector('.prog-panel');
+    const photoEl  = document.getElementById('progPhoto');
+    const tagEl    = document.getElementById('progTag');
+    const kcalEl   = document.getElementById('progKcal');
+    const descEl   = document.getElementById('progDesc');
+    const perksEl  = document.getElementById('progPerks');
+    const dursEl   = document.getElementById('progDurations');
+    const totalEl  = document.getElementById('progTotal');
 
-    if (!goals.length || !panel) return;
+    if (!goalBtns.length || !panel) return;
 
-    function fmt(n) {
-        return n.toLocaleString('ru-RU') + ' ₽';
+    function fmt(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
+
+    function renderDurations(prog) {
+        dursEl.innerHTML = prog.prices.map((pr, i) => {
+            const badge = pr.trial
+                ? '<span class="dur-badge">Пробный</span>'
+                : (pr.bonus ? `<span class="dur-badge">${pr.bonus}</span>` : '');
+            return `
+            <div class="dur-card${i === 0 ? ' active' : ''}" data-price="${pr.price}">
+                ${badge}
+                <div class="dur-card-label">${pr.label}</div>
+                ${pr.oldPrice ? `<div class="dur-card-old">${fmt(pr.oldPrice)}</div>` : ''}
+                <div class="dur-card-price">${fmt(pr.price)}</div>
+                <div class="dur-card-per">${fmt(pr.perDay)} / день</div>
+                ${pr.discountPct ? `<div class="dur-card-discount">-${pr.discountPct}%</div>` : ''}
+            </div>`;
+        }).join('');
+
+        totalEl.textContent = fmt(prog.prices[0].price);
+
+        dursEl.querySelectorAll('.dur-card').forEach(card => {
+            card.addEventListener('click', () => {
+                dursEl.querySelectorAll('.dur-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                totalEl.textContent = fmt(+card.dataset.price);
+            });
+        });
     }
 
-    function renderProg(idx) {
-        const p = PROG_DATA[idx];
+    function renderProg(prog) {
         panel.classList.add('prog-panel--fading');
-
         setTimeout(() => {
-            photo.src = p.photo;
-            photo.alt = p.name;
-            tag.textContent = p.tag;
-            kcalEl.textContent = p.kcal;
-            descEl.textContent = p.desc;
-            perksEl.innerHTML = p.perks.map(t => `<li>${t}</li>`).join('');
-
-            pricesEl.innerHTML = p.prices.map(pr => `
-                <a href="#order" class="price-card${pr.popular ? ' price-card--popular' : ''}">
-                    ${pr.popular ? '<span class="price-card-badge">Хит</span>' : ''}
-                    <div class="price-card-label">${pr.label}</div>
-                    <div class="price-card-days">${pr.days}</div>
-                    <div class="price-card-price">${fmt(pr.price)}</div>
-                    <div class="price-card-per">${fmt(pr.perDay)} / день</div>
-                    ${pr.discount ? `<div class="price-card-discount">-${pr.discount}%</div>` : ''}
-                </a>
-            `).join('');
-
+            photoEl.src = prog.photo;
+            photoEl.alt = prog.name;
+            tagEl.textContent = prog.tag;
+            kcalEl.textContent = prog.kcal;
+            descEl.textContent = prog.desc;
+            perksEl.innerHTML = prog.perks.map(t => `<li>${t}</li>`).join('');
+            renderDurations(prog);
             panel.classList.remove('prog-panel--fading');
-        }, 220);
+        }, 180);
     }
 
-    goals.forEach(btn => {
+    function selectGoal(goalIdx) {
+        const goal = GOALS[goalIdx];
+        const hasMultiple = goal.programs.length > 1;
+
+        if (hasMultiple) {
+            step2.style.display = '';
+            subsEl.innerHTML = goal.programs.map((p, i) => `
+                <div class="prog-sub-card${i === 0 ? ' active' : ''}" data-sub="${i}">
+                    <div class="prog-sub-name">${p.name}</div>
+                    <div class="prog-sub-kcal">${p.kcal}</div>
+                </div>`).join('');
+
+            subsEl.querySelectorAll('.prog-sub-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    subsEl.querySelectorAll('.prog-sub-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    renderProg(goal.programs[+card.dataset.sub]);
+                });
+            });
+        } else {
+            step2.style.display = 'none';
+        }
+
+        renderProg(goal.programs[0]);
+    }
+
+    goalBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            goals.forEach(b => b.classList.remove('active'));
+            goalBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderProg(+btn.dataset.prog);
+            selectGoal(+btn.dataset.goal);
         });
     });
 
-    renderProg(0);
+    selectGoal(0);
 })();

@@ -259,42 +259,47 @@
             <div class="section-header reveal-up">
                 <div class="section-eyebrow">Программы питания</div>
                 <h2 class="section-title">Выберите <em>свою программу</em></h2>
-                <p class="section-sub">Пять направлений - одно из них создано именно для вас</p>
-            </div>
-            <!-- Goal selector tabs -->
-            <div class="prog-goals reveal-up delay-1">
-                <button class="prog-goal active" data-prog="0">
-                    <span class="prog-goal-title">Похудение</span>
-                    <span class="prog-goal-sub">от 900 ккал</span>
-                </button>
-                <button class="prog-goal" data-prog="1">
-                    <span class="prog-goal-title">Поддержание</span>
-                    <span class="prog-goal-sub">от 1 200 ккал</span>
-                </button>
-                <button class="prog-goal" data-prog="2">
-                    <span class="prog-goal-title">Сбалансированное</span>
-                    <span class="prog-goal-sub">от 1 800 ккал</span>
-                </button>
-                <button class="prog-goal" data-prog="3">
-                    <span class="prog-goal-title">Набор массы</span>
-                    <span class="prog-goal-sub">от 2 500 ккал</span>
-                </button>
-                <button class="prog-goal" data-prog="4">
-                    <span class="prog-goal-title">Как дома</span>
-                    <span class="prog-goal-sub">от 3 000 ккал</span>
-                </button>
             </div>
 
-            <!-- Program detail + pricing panel -->
+            <!-- ШАГ 1: цель -->
+            <div class="prog-step-wrap reveal-up delay-1">
+                <p class="prog-step-label"><span>Шаг 1.</span> Выберите свою цель</p>
+                <div class="prog-goals">
+                    <button class="prog-goal active" data-goal="0">
+                        <span class="prog-goal-title">Снижение веса</span>
+                        <span class="prog-goal-sub">от 900 ккал</span>
+                    </button>
+                    <button class="prog-goal" data-goal="1">
+                        <span class="prog-goal-title">Не хочу готовить</span>
+                        <span class="prog-goal-sub">от 1 200 ккал</span>
+                    </button>
+                    <button class="prog-goal" data-goal="2">
+                        <span class="prog-goal-title">Баланс</span>
+                        <span class="prog-goal-sub">от 1 800 ккал</span>
+                    </button>
+                    <button class="prog-goal" data-goal="3">
+                        <span class="prog-goal-title">Набор массы</span>
+                        <span class="prog-goal-sub">от 3 000 ккал</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ШАГ 2: программа (появляется когда у цели 2+ программы) -->
+            <div class="prog-step-wrap" id="progStep2" style="display:none">
+                <p class="prog-step-label"><span>Шаг 2.</span> Выберите программу питания</p>
+                <div class="prog-subs" id="progSubs"></div>
+            </div>
+
+            <!-- ШАГ 3: детали + сроки + цены -->
             <div class="prog-panel reveal-up delay-2">
                 <div class="prog-panel-left">
                     <div class="prog-panel-photo">
-                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt="Похудение">
-                        <span class="prog-panel-photo-label" id="progTag">Для похудения</span>
+                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt="">
+                        <span class="prog-panel-photo-label" id="progTag">Снижение веса</span>
                     </div>
                     <div class="prog-panel-meta">
                         <div class="prog-panel-kcal" id="progKcal">900 ккал / день</div>
-                        <p class="prog-panel-desc" id="progDesc">Дефицит калорий, высокое содержание белка, минимум простых углеводов. Минус 2 кг в неделю.</p>
+                        <p class="prog-panel-desc" id="progDesc">Дефицит калорий с высоким содержанием белка. Минус 2 кг в неделю без чувства голода.</p>
                         <ul class="prog-panel-perks" id="progPerks">
                             <li>Расчёт по вашему КБЖУ</li>
                             <li>Контроль порций</li>
@@ -303,12 +308,10 @@
                     </div>
                 </div>
                 <div class="prog-panel-right">
-                    <div class="prog-pricing-label">Выберите срок доставки</div>
-                    <div class="prog-prices" id="progPrices">
-                        <!-- Rendered by JS -->
-                    </div>
-                    <a href="#order" class="btn btn-primary prog-order-btn">Заказать программу</a>
-                    <p class="prog-order-note">Бесплатная консультация по подбору рациона</p>
+                    <p class="prog-step-label"><span>Шаг 3.</span> Выберите срок доставки</p>
+                    <div class="prog-durations" id="progDurations"></div>
+                    <div class="prog-total">ИТОГО: <span id="progTotal">790 ₽</span></div>
+                    <a href="#order" class="btn btn-primary prog-order-btn">Оформить заказ</a>
                 </div>
             </div>
         </div>
