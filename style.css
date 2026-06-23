@@ -3,19 +3,19 @@
    ============================================ */
 :root {
     --bg-dark:       #FFFFFF;
-    --bg-section:    #F4F8F5;
-    --bg-card:       #EDF7F2;
-    --bg-card-hover: #E3F2E9;
-    --gold:          #1D8C55;
-    --gold-light:    #2EA868;
-    --gold-dim:      rgba(29,140,85,0.10);
-    --green:         #167A46;
-    --green-light:   #1D8C55;
-    --text-primary:  #1A2A1E;
-    --text-secondary:#4A6E58;
-    --text-muted:    #8AB09A;
-    --border:        rgba(0,0,0,0.08);
-    --border-gold:   rgba(29,140,85,0.22);
+    --bg-section:    #BBE9CA;
+    --bg-card:       #FFFFFF;
+    --bg-card-hover: #EEF9F3;
+    --gold:          #2FC86E;
+    --gold-light:    #42D47E;
+    --gold-dim:      rgba(47,200,110,0.16);
+    --green:         #24B462;
+    --green-light:   #2FC86E;
+    --text-primary:  #0E1B12;
+    --text-secondary:#1C3828;
+    --text-muted:    #4D7A5F;
+    --border:        rgba(0,0,0,0.12);
+    --border-gold:   rgba(47,200,110,0.38);
 
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body:    'Jost', system-ui, sans-serif;
@@ -160,17 +160,27 @@ em { font-style: italic; }
     top: 0; left: 0; right: 0;
     z-index: 100;
     padding: 1.2rem 0;
-    transition: background 0.45s, padding 0.45s, border-color 0.45s;
+    transition: padding 0.45s, border-color 0.45s;
+    /* background/blur on ::before so position:fixed children stay viewport-relative */
+}
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(255,255,255,0.88);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    transition: background 0.45s;
+    z-index: -1;
 }
 .header.scrolled {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.header.scrolled::before {
     background: rgba(255,255,255,0.96);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border);
 }
 .nav {
     display: flex;
@@ -261,8 +271,8 @@ em { font-style: italic; }
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     background:
-        linear-gradient(to right, rgba(244,248,245,0.97) 0%, rgba(244,248,245,0.94) 40%, rgba(244,248,245,0.45) 62%, rgba(244,248,245,0.04) 100%),
-        linear-gradient(to bottom, transparent 0%, transparent 78%, rgba(244,248,245,0.90) 100%);
+        linear-gradient(to right, rgba(245,252,248,0.97) 0%, rgba(245,252,248,0.95) 42%, rgba(245,252,248,0.40) 64%, rgba(245,252,248,0.0) 100%),
+        linear-gradient(to bottom, transparent 0%, transparent 80%, rgba(245,252,248,0.80) 100%);
 }
 .hero-content {
     position: relative;
@@ -458,8 +468,8 @@ em { font-style: italic; }
     transform: scaleX(1);
 }
 .program-card--featured {
-    background: linear-gradient(160deg, rgba(29,140,85,0.14) 0%, rgba(22,122,70,0.22) 100%);
-    border-color: var(--border-gold);
+    border-color: var(--green);
+    border-width: 2px;
 }
 .program-badge {
     position: absolute;
@@ -555,7 +565,7 @@ em { font-style: italic; }
     font-family: var(--font-display);
     font-size: 3.8rem;
     font-weight: 700;
-    color: rgba(29,140,85,0.22);
+    color: var(--green);
     line-height: 1;
     margin-bottom: 1rem;
     transition: color 0.5s;
@@ -689,7 +699,7 @@ em { font-style: italic; }
 }
 .form-group input,
 .form-group select {
-    background: var(--bg-section);
+    background: #FFFFFF;
     border: 1px solid rgba(0,0,0,0.14);
     border-radius: 8px;
     padding: 0.78rem 1rem;
@@ -926,7 +936,7 @@ em { font-style: italic; }
 .sched-card:hover {
     border-color: var(--border-gold);
     transform: translateY(-4px);
-    box-shadow: 0 18px 48px rgba(29,140,85,0.10), 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 18px 48px rgba(47,200,110,0.15), 0 4px 12px rgba(0,0,0,0.08);
 }
 .sched-card-type {
     padding: 0.52rem 1rem;
@@ -935,7 +945,7 @@ em { font-style: italic; }
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold);
-    background: rgba(29,140,85,0.08);
+    background: rgba(47,200,110,0.12);
     border-bottom: 1px solid var(--border);
 }
 .sched-card-img {
@@ -1310,12 +1320,12 @@ em { font-style: italic; }
         flex-direction: column;
         gap: 0;
         position: fixed;
-        top: 0; left: 0; right: 0;
+        top: 0; left: 0; right: 0; bottom: 0;
         padding: 5rem 2rem 2rem;
         background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
+        overflow-y: auto;
         z-index: 99;
     }
     .nav-links.open li { border-bottom: 1px solid var(--border); }
@@ -1336,9 +1346,31 @@ em { font-style: italic; }
 
     /* Grids */
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .programs-grid { grid-template-columns: 1fr; }
     .contacts-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* Programs — horizontal swipe carousel */
+    .programs-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0.85rem;
+        padding-bottom: 1rem;
+        padding-left: clamp(1.2rem, 5vw, 2.5rem);
+        padding-right: clamp(1.2rem, 5vw, 2.5rem);
+        margin-left: calc(-1 * clamp(1.2rem, 5vw, 2.5rem));
+        margin-right: calc(-1 * clamp(1.2rem, 5vw, 2.5rem));
+    }
+    .programs-grid::-webkit-scrollbar { display: none; }
+    .programs-grid .program-card {
+        min-width: min(82vw, 300px);
+        max-width: min(82vw, 300px);
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
 
     /* Menu slider on mobile */
     .menu-nav { display: none; }
@@ -1475,35 +1507,35 @@ body::after {
    ============================================ */
 .hero-title        { color: #1A2A1E; }
 .hero-title em     {
-    background: linear-gradient(125deg, #0E5C34 0%, #1D8C55 100%);
+    background: linear-gradient(125deg, #0E8048 0%, #2FC86E 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
 }
-.hero-tag          { color: #1D8C55; }
-.hero-sub          { color: #2D4538; }
+.hero-tag          { color: #1E9A52; }
+.hero-sub          { color: #2A4035; }
 .hero .btn-ghost   { color: #1A2A1E; border-color: rgba(0,0,0,0.32); }
 .hero .btn-ghost:hover { border-color: rgba(0,0,0,0.60); }
 .cta-title         { color: #F0EBE0; }
-.cta-title em      { color: #2EA868; }
+.cta-title em      { color: #3ABF6E; }
 .cta-sub           { color: rgba(240,235,224,0.82); }
 .cta-note          { color: rgba(240,235,224,0.55); }
 
 /* Program cards — enhanced hover glow */
 .program-card:hover {
-    box-shadow: 0 24px 64px rgba(29,140,85,0.12), 0 6px 20px rgba(0,0,0,0.10);
+    box-shadow: 0 24px 64px rgba(47,200,110,0.18), 0 6px 20px rgba(0,0,0,0.10);
 }
 .program-card--featured {
-    box-shadow: 0 8px 40px rgba(29,140,85,0.12);
+    box-shadow: 0 8px 40px rgba(47,200,110,0.18);
 }
 .program-card--featured:hover {
-    box-shadow: 0 28px 72px rgba(29,140,85,0.18), 0 8px 24px rgba(0,0,0,0.12);
+    box-shadow: 0 28px 72px rgba(47,200,110,0.24), 0 8px 24px rgba(0,0,0,0.12);
 }
 
 /* Steps — glow on hover */
 .step:hover {
-    box-shadow: 0 16px 48px rgba(29,140,85,0.10);
+    box-shadow: 0 16px 48px rgba(47,200,110,0.15);
 }
 
 /* Menu slider — perspective for tilt depth */
@@ -1521,7 +1553,7 @@ body::after {
     top: 50%; left: 50%;
     width: min(700px, 100vw);
     height: min(280px, 40vw);
-    background: radial-gradient(ellipse at center, rgba(29,140,85,0.07) 0%, transparent 68%);
+    background: radial-gradient(ellipse at center, rgba(47,200,110,0.12) 0%, transparent 68%);
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: -1;
@@ -1713,9 +1745,9 @@ body::after {
 
 /* Phone — subtle pulse ring */
 @keyframes phone-ring {
-    0%   { box-shadow: 0 0 0 0   rgba(90,158,111,0.5); }
-    70%  { box-shadow: 0 0 0 10px rgba(90,158,111,0); }
-    100% { box-shadow: 0 0 0 0   rgba(90,158,111,0); }
+    0%   { box-shadow: 0 0 0 0   rgba(47,200,110,0.55); }
+    70%  { box-shadow: 0 0 0 12px rgba(47,200,110,0); }
+    100% { box-shadow: 0 0 0 0   rgba(47,200,110,0); }
 }
 .contact-item--phone .contact-icon {
     animation: phone-ring 2.4s ease-out infinite;
@@ -1723,18 +1755,18 @@ body::after {
 
 .contact-icon {
     width: 46px; height: 46px;
-    background: var(--bg-section);
-    border: 1px solid var(--border-gold);
+    background: var(--green);
+    border: none;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: var(--gold);
+    color: #FFFFFF;
     transition: background 0.35s, transform 0.4s var(--ease);
 }
 .contact-item:hover .contact-icon {
-    background: var(--gold-dim);
+    background: var(--gold);
     transform: scale(1.1) rotate(-6deg);
 }
 .contact-icon svg { width: 19px; height: 19px; }
@@ -1769,7 +1801,7 @@ body::after {
 
 /* Messengers card */
 .contacts-messengers {
-    background: linear-gradient(155deg, rgba(29,140,85,0.10) 0%, rgba(22,122,70,0.16) 100%);
+    background: #FFFFFF;
     border: 1px solid var(--border-gold);
     border-radius: var(--radius-lg);
     padding: clamp(2rem, 5vw, 3rem);
@@ -1905,41 +1937,41 @@ body::after { opacity: 0.062; }
    the flat single-colour feel without changing the palette.    */
 .about {
     background:
-        radial-gradient(ellipse 55% 70% at 88% 38%, rgba(29,140,85,0.055) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 50% at  8% 68%, rgba(29,140,85,0.04)  0%, transparent 52%),
+        radial-gradient(ellipse 55% 70% at 88% 38%, rgba(47,200,110,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 50% at  8% 68%, rgba(47,200,110,0.07) 0%, transparent 52%),
         var(--bg-dark);
 }
 .programs {
     background:
-        radial-gradient(ellipse 65% 55% at  6% 82%, rgba(29,140,85,0.07)  0%, transparent 55%),
-        radial-gradient(ellipse 50% 45% at 94% 14%, rgba(29,140,85,0.05)  0%, transparent 50%),
+        radial-gradient(ellipse 65% 55% at  6% 82%, rgba(47,200,110,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 45% at 94% 14%, rgba(47,200,110,0.09) 0%, transparent 50%),
         var(--bg-section);
 }
 .how {
     background:
-        radial-gradient(ellipse 62% 52% at 50%  0%, rgba(29,140,85,0.055) 0%, transparent 60%),
-        radial-gradient(ellipse 45% 42% at 82% 100%,rgba(29,140,85,0.04)  0%, transparent 55%),
-        var(--bg-dark);
+        radial-gradient(ellipse 62% 52% at 50%  0%, rgba(47,200,110,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 42% at 82% 100%,rgba(47,200,110,0.07) 0%, transparent 55%),
+        var(--bg-section);
 }
 .calculator {
     background:
-        radial-gradient(ellipse 62% 58% at 50% 55%, rgba(29,140,85,0.05)  0%, transparent 60%),
+        radial-gradient(ellipse 62% 58% at 50% 55%, rgba(47,200,110,0.09) 0%, transparent 60%),
         var(--bg-section);
 }
 .sched-section {
     background:
-        radial-gradient(ellipse 65% 50% at 94% 92%, rgba(29,140,85,0.06)  0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at  6%  8%, rgba(29,140,85,0.04)  0%, transparent 52%),
+        radial-gradient(ellipse 65% 50% at 94% 92%, rgba(47,200,110,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at  6%  8%, rgba(47,200,110,0.07) 0%, transparent 52%),
         var(--bg-dark);
 }
 .faq {
     background:
-        radial-gradient(ellipse 55% 52% at 50% 108%,rgba(29,140,85,0.05)  0%, transparent 60%),
+        radial-gradient(ellipse 55% 52% at 50% 108%,rgba(47,200,110,0.09) 0%, transparent 60%),
         var(--bg-dark);
 }
 .contacts {
     background:
-        radial-gradient(ellipse 62% 62% at 14% 50%, rgba(29,140,85,0.06)  0%, transparent 55%),
+        radial-gradient(ellipse 62% 62% at 14% 50%, rgba(47,200,110,0.10) 0%, transparent 55%),
         var(--bg-section);
     border-top: 1px solid var(--border);
 }
@@ -1957,6 +1989,24 @@ body::after { opacity: 0.062; }
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent; /* fallback */
+}
+
+/* On mint-background sections: eyebrow + em need solid dark-green for readability */
+.how .section-eyebrow,
+.programs .section-eyebrow,
+.calculator .section-eyebrow,
+.contacts .section-eyebrow {
+    color: #0C5C32;
+}
+.how .section-title em,
+.programs .section-title em,
+.calculator .section-title em,
+.contacts .section-title em {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: #0C5C32;
+    color: #0C5C32;
 }
 
 /* Hero title: tighter tracking for authority */
@@ -2001,57 +2051,49 @@ body::after { opacity: 0.062; }
     border-radius: 1px;
 }
 
-/* ── Glass surfaces: program cards ──
-   Semi-transparent background + backdrop blur creates
-   a frosted-glass depth against the organic section gradients. */
+/* ── Solid white surfaces: program cards ── */
 .program-card {
-    background: rgba(237,247,242,0.60);
-    backdrop-filter: blur(8px) saturate(140%);
-    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    background: #FFFFFF;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.88),
-        0 2px 8px rgba(29,140,85,0.04);
+        0 2px 16px rgba(0,0,0,0.08),
+        0 1px 3px rgba(0,0,0,0.04);
 }
 .program-card:hover {
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.88),
-        0 28px 64px rgba(29,140,85,0.15),
-        0 8px 20px rgba(0,0,0,0.05);
+        0 20px 56px rgba(29,140,85,0.20),
+        0 4px 12px rgba(0,0,0,0.06);
 }
 .program-card--featured {
-    background: linear-gradient(145deg,
-        rgba(29,140,85,0.13) 0%,
-        rgba(22,122,70,0.20) 100%
-    );
-    backdrop-filter: blur(10px) saturate(150%);
-    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    background: #FFFFFF;
+    border: 2px solid var(--green);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.68),
-        inset 0 -1px 0 rgba(29,140,85,0.08),
-        0 8px 40px rgba(29,140,85,0.16);
+        0 8px 48px rgba(47,200,110,0.28),
+        0 2px 8px rgba(0,0,0,0.04);
 }
 .program-card--featured:hover {
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.68),
-        0 32px 72px rgba(29,140,85,0.22),
-        0 10px 28px rgba(0,0,0,0.06);
+        0 28px 72px rgba(47,200,110,0.34),
+        0 8px 24px rgba(0,0,0,0.06);
 }
 
-/* ── Glass surfaces: step cards ── */
+/* ── Solid white surfaces: step cards ── */
 .step {
     position: relative;
-    background: rgba(237,247,242,0.60);
-    backdrop-filter: blur(6px) saturate(140%);
-    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    background: #FFFFFF;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.88),
-        0 2px 8px rgba(29,140,85,0.04);
+        0 2px 16px rgba(0,0,0,0.07),
+        0 1px 3px rgba(0,0,0,0.03);
 }
 .step:hover {
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.88),
-        0 24px 56px rgba(29,140,85,0.13),
-        0 8px 20px rgba(0,0,0,0.05);
+        0 20px 52px rgba(29,140,85,0.18),
+        0 4px 12px rgba(0,0,0,0.05);
 }
 /* Thin gradient accent line at top of step cards */
 .step::before {
@@ -2067,7 +2109,7 @@ body::after { opacity: 0.062; }
     position: relative;
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.90),
-        0 1px 4px rgba(29,140,85,0.04);
+        0 1px 4px rgba(47,200,110,0.07);
 }
 /* Accent line reveals on hover */
 .sched-card::before {
@@ -2084,18 +2126,17 @@ body::after { opacity: 0.062; }
 
 /* Hover: type strip gets slightly stronger tint */
 .sched-card:hover .sched-card-type {
-    background: rgba(29,140,85,0.12);
+    background: rgba(47,200,110,0.18);
 }
 
-/* ── Glass surface: calculator form ── */
+/* ── Solid white surface: calculator form ── */
 .calc-form {
-    background: rgba(237,247,242,0.65);
-    backdrop-filter: blur(10px) saturate(130%);
-    -webkit-backdrop-filter: blur(10px) saturate(130%);
+    background: #FFFFFF;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.90),
-        0 4px 24px rgba(29,140,85,0.07),
-        0 1px 3px rgba(0,0,0,0.04);
+        0 4px 32px rgba(0,0,0,0.09),
+        0 1px 4px rgba(0,0,0,0.04);
 }
 
 /* ── Glass surface: FAQ items ── */
@@ -2110,22 +2151,22 @@ body::after { opacity: 0.062; }
 .faq-item:hover {
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.85),
-        0 4px 20px rgba(29,140,85,0.08);
+        0 4px 20px rgba(47,200,110,0.12);
 }
 .faq-item.open {
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.85),
-        0 6px 24px rgba(29,140,85,0.10);
+        0 6px 24px rgba(47,200,110,0.15);
 }
 
-/* ── Glass surface: contact items ── */
+/* ── Solid white surface: contact items ── */
 .contact-item {
-    background: rgba(237,247,242,0.65);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: #FFFFFF;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.88),
-        0 1px 4px rgba(0,0,0,0.03);
+        0 2px 14px rgba(0,0,0,0.07),
+        0 1px 3px rgba(0,0,0,0.03);
 }
 .contact-item:hover {
     border-color: var(--border-gold);
@@ -2133,7 +2174,7 @@ body::after { opacity: 0.062; }
     transform: translateX(8px);
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.88),
-        0 12px 36px rgba(29,140,85,0.12),
+        0 12px 36px rgba(47,200,110,0.18),
         0 4px 10px rgba(0,0,0,0.04);
 }
 
@@ -2151,7 +2192,7 @@ body::after { opacity: 0.062; }
     -webkit-backdrop-filter: blur(10px) saturate(130%);
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.68),
-        0 4px 24px rgba(29,140,85,0.08);
+        0 4px 24px rgba(47,200,110,0.12);
 }
 
 /* ── Phone ring animation: updated colours ── */
