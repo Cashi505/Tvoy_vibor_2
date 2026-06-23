@@ -15,30 +15,30 @@
 ## Стек и архитектура
 
 - **HTML:** `index.html` — вся разметка, один файл
-- **CSS:** `style.css` — дизайн-токены в `:root`, потом компонентные блоки, потом `@media`, потом блок `/* PREMIUM LAYER */`
-- **JS:** `script.js` — без библиотек. IntersectionObserver для reveal-анимаций, FAQ-аккордеон, калькулятор калорий, 3D-tilt карточек, магнитные кнопки, телефонный форматтер
+- **CSS:** `style.css` — дизайн-токены в `:root`, потом компонентные блоки, потом `@media`, потом `/* PREMIUM LAYER */` (фиксы светлой темы), потом блок новых компонентов
+- **JS:** `script.js` — без библиотек. IntersectionObserver, FAQ-аккордеон, калькулятор КБЖУ, custom cursor, scroll progress bar, hero parallax, mobile sticky CTA
 - **Шрифты:** Google Fonts CDN — Cormorant Garamond (заголовки) + Jost (текст)
-- **Видео:** оптимизированные файлы `video-hero.webm` (VP9) и `video-hero.mp4` (H.264, faststart). Постер: `video-hero-poster.jpg`. Оригинал сохранён как `Tuna_salad_ingredients_pack_cont…_202606191820.mp4` (резервная копия).
+- **Видео:** `video-hero.webm` (VP9) + `video-hero.mp4` (H.264). Постер: `video-hero-poster.jpg`.
 
 ---
 
-## Дизайн-система (CSS custom properties)
+## Дизайн-система (CSS custom properties) — Вариант 5 (светлый, ТЕКУЩИЙ)
 
 ```css
---bg-dark:       #0A1209   /* основной фон страницы */
---bg-section:    #111F15   /* фон чётных секций */
---bg-card:       #162418   /* фон карточек */
---bg-card-hover: #1C2E1F
---gold:          #C8A050   /* золотой акцент — заголовки, иконки, hover */
---gold-light:    #D4B570
---gold-dim:      rgba(200,160,80,0.14)
---green:         #5A9E6F   /* зелёный — кнопки btn-primary */
---green-light:   #68B07A
---text-primary:  #F0EBE0   /* основной текст */
---text-secondary:#8FA896   /* вторичный текст */
---text-muted:    #4A5E4F   /* использовать осторожно — низкий контраст */
---border:        rgba(255,255,255,0.07)
---border-gold:   rgba(200,160,80,0.26)
+--bg-dark:       #FFFFFF    /* основной фон страницы */
+--bg-section:    #BBE9CA    /* фон секций (насыщенный мятный) */
+--bg-card:       #FFFFFF    /* фон карточек */
+--bg-card-hover: #EEF9F3
+--gold:          #2FC86E    /* акцент — используется как "gold" */
+--gold-light:    #42D47E
+--gold-dim:      rgba(47,200,110,0.16)
+--green:         #24B462    /* основной зелёный — кнопки, иконки */
+--green-light:   #2FC86E
+--text-primary:  #0E1B12    /* основной текст (почти чёрный) */
+--text-secondary:#1C3828    /* вторичный текст */
+--text-muted:    #4D7A5F    /* приглушённый */
+--border:        rgba(0,0,0,0.12)
+--border-gold:   rgba(47,200,110,0.38)
 --font-display:  'Cormorant Garamond', Georgia, serif
 --font-body:     'Jost', system-ui, sans-serif
 --size-hero:     clamp(3rem, 7vw, 6.5rem)
@@ -50,32 +50,37 @@
 --container:     1200px
 ```
 
+**PREMIUM LAYER** (строки ~2040–2090 в style.css) — фиксы для светлой темы:
+- Все карточки (`program-card`, `step`, `calc-form`, `contact-item`) переведены на solid `#FFFFFF` без `backdrop-filter`
+- Contact icons: `background: var(--green); color: #FFFFFF` (иначе invisible на mint)
+- Inputs: `background: #FFFFFF` (иначе mint-on-mint)
+- em-text на mint секциях: принудительный сброс `background: none; -webkit-text-fill-color: #0C5C32`
+
 ---
 
 ## Структура файлов
 
 ```
-Еда/
+Еда 2/
 ├── index.html
 ├── style.css
 ├── script.js
 ├── CLAUDE.md                   ← этот файл
-├── README.md                   ← инструкция для пользователя
-├── video-hero.webm             ← фоновое видео (VP9, 822 КБ)
-├── video-hero.mp4              ← фоновое видео (H.264, 1011 КБ, faststart)
-├── video-hero-poster.jpg       ← постер кадр (116 КБ)
+├── video-hero.webm             ← фоновое видео (VP9)
+├── video-hero.mp4              ← фоновое видео (H.264, faststart)
+├── video-hero-poster.jpg       ← постер кадр
 ├── Tuna_salad_ingredients_pack_cont…_202606191820.mp4  ← оригинал (резерв)
 ├── images/
-│   ├── logo.png                ← логотип (хедер 60px, футер 96px)
+│   ├── logo.png                ← логотип
 │   └── menu/
-│       ├── tuna-salad.jpeg
-│       ├── chicken-breast.jpeg
-│       ├── oatmeal-berries.jpeg
-│       ├── beef-steak.jpeg
-│       ├── chicken-soup.jpeg
-│       └── protein-box.jpeg
+│       ├── tuna-salad.jpeg     → программа «Похудение» (900 ккал)
+│       ├── oatmeal-berries.jpeg→ программа «Поддержание» (1200 ккал)
+│       ├── chicken-breast.jpeg → программа «Сбалансированное» (1800 ккал, featured)
+│       ├── beef-steak.jpeg     → программа «Набор массы» (2500 ккал)
+│       ├── chicken-soup.jpeg   → программа «Как дома» (3000 ккал)
+│       └── protein-box.jpeg    → галерея меню
 └── massagers/
-    ├── max.png                 ← иконка мессенджера Max
+    ├── max.png
     └── telegram.png
 ```
 
@@ -83,95 +88,97 @@
 
 ## Секции сайта (порядок в index.html)
 
-1. `<header id="header">` — фиксированный хедер, становится `scrolled` при прокрутке
-2. `<section class="hero" id="hero">` — видео-фон (autoplay loop), заголовок
-3. `<div class="ticker">` — бегущая строка (не section, нет id)
-4. `<section class="stats" id="stats">` — 4 счётчика с анимацией
-5. `<section class="about" id="about">` — 2 колонки: текст + фичи
-6. `<section class="programs" id="programs">` — 5 карточек программ
-7. `<section class="how" id="how">` — 3 шага
-8. `<section class="calculator" id="calculator">` — калькулятор КБЖУ
-9. `<section class="sched-section" id="menu">` — еженедельное расписание: выбор программы (5 шт) + выбор дня (Пн–Сб) + 4 блюда в день, рендерится через JS
-10. `<section class="faq" id="faq">` — 6 вопросов, аккордеон
-11. `<section class="contacts" id="contacts">` — адрес, телефон, почта, мессенджеры
-12. `<section class="cta-section" id="order">` — форма заявки на фоне видео
-13. `<footer class="footer">` — навигация, контакты, копирайт
+1. `<div class="scroll-progress" id="scrollProgress">` — прогресс-бар прокрутки (фиксированный)
+2. `<header id="header">` — логотип, навигация, кнопка «Заказать», бургер
+3. `<section class="hero" id="hero">` — видео-фон, заголовок, 2 CTA
+4. `<div class="ticker">` — бегущая строка
+5. `<section class="stats" id="stats">` — 4 счётчика: 200+ блюд / 500+ клиентов / 2кг / 100%
+6. `<section class="about" id="about">` — 2 колонки: текст + 4 фичи
+7. `<div class="mono-strip">` — тёмная полоска с 4 монументальными числами (не section, нет id)
+8. `<section class="how" id="how">` — вертикальный flow из 3 шагов (`.step-flow-item`)
+9. `<section class="programs" id="programs">` — 5 карточек с фото (`.program-card-photo`)
+10. `<section class="results" id="results">` — 3 карточки отзывов + trust-bar (добавлено)
+11. `<section class="calculator" id="calculator">` — калькулятор КБЖУ
+12. `<section class="sched-section" id="menu">` — галерея блюд + еженедельное расписание
+13. `<section class="faq" id="faq">` — 6 вопросов с номерами (01–06), аккордеон
+14. `<section class="contacts" id="contacts">` — адрес, телефон, почта, мессенджеры
+15. `<section class="cta-section" id="order">` — форма заявки
+16. `<footer class="footer">` — 4 колонки
+17. `<div class="mobile-cta-bar" id="mobileCta">` — sticky мобильная кнопка
+18. `<div class="cursor-dot" id="cursorDot">` + `<div class="cursor-ring" id="cursorRing">` — кастомный курсор
 
 ---
 
 ## Как работают ключевые механики
 
+### Scroll progress bar
+`#scrollProgress` — тонкая зелёная полоска сверху. JS обновляет `width` через `scroll` event.
+
+### Custom cursor
+Только на `(hover: hover) and (pointer: fine)` устройствах. Dot следует мгновенно, ring с инерцией 13% через `requestAnimationFrame`. Ring увеличивается на hover-элементах.
+
+### Hero video parallax
+`translateY(scrollY * 0.28) scale(1.05)` — применяется к `#heroVideo` через `scroll` listener.
+
 ### Reveal-анимации
-Классы `.reveal-up`, `.reveal-fade`, `.reveal-left`, `.reveal-right` — начальное состояние `opacity:0` + `transform`. IntersectionObserver в `script.js` добавляет `.visible` → CSS-переход. Blur: `.reveal-up` дополнительно имеет `filter: blur(5px)` → `blur(0)`.
+Классы `.reveal-up`, `.reveal-fade`, `.reveal-left`, `.reveal-right` — IntersectionObserver добавляет `.visible` → CSS-переход.
+
+### Programs — карточки с фото
+Каждая карточка: `.program-card > .program-card-photo > img` + `.program-card-overlay` + `.program-card-body`. Фото 16:9, zoom при hover. Цветной border-left акцент (разные оттенки зелёного). Мобиль: горизонтальный scroll-snap карусель.
 
 ### FAQ аккордеон
-CSS: `grid-template-rows: 0fr → 1fr` на `.faq-answer` (Safari 16+).
-JS: автоматически определяет, поддерживает ли браузер эту анимацию (`needsHeightFallback`), и если нет — использует height-based анимацию через `scrollHeight`.
-Структура: `.faq-answer > .faq-answer-inner > p` — оба вложенных div обязательны.
+CSS `grid-template-rows: 0fr → 1fr` (Safari 16+). JS fallback через `scrollHeight` для Safari < 16.
+Вопросы имеют `.faq-q-num` (01–06) — зелёные номера слева.
 
-### Калькулятор калорий
-Формула Миффлина-Сан Жеора. Мужчины: `(10*вес) + (6.25*рост) - (5*возраст) + 5`. Женщины: `... - 161`. Умножается на коэффициент активности, затем на цель (±%). Результат сравнивается с пороговыми значениями программ: 1050 / 1400 / 2100 / 2750 / ∞.
+### Mobile sticky CTA
+`#mobileCta` появляется когда `#hero` уходит из viewport, исчезает у `#order`. IntersectionObserver + кнопка закрыть.
 
-### Еженедельное расписание (секция меню)
-JS-IIFE в конце `script.js`. Данные: массив `BASE[6][4]` (6 дней × 4 блюда, базовый масштаб 1800 ккал). Массив `PROGRAMS[5]` с множителями `scale` (0.5 / 0.667 / 1.0 / 1.389 / 1.667). Функция `render()` применяет `Math.round(value * scale)` ко всем макросам и весу, затем перерисовывает `#schedSummary` (итоги дня) и `#schedGrid` (4 карточки блюд).
+### Kalькулятор калорий
+Формула Миффлина-Сан Жеора. Сравнивает с порогами 1050/1400/2100/2750 для подбора программы.
 
-### Магнитные кнопки
-`mousemove` на `.btn-primary`, `.btn-nav` → `translate` на 25% от смещения курсора относительно центра кнопки.
-
-### Мессенджеры pop-анимация
-IntersectionObserver наблюдает за `.messenger-btns`. При попадании в viewport добавляет класс `.popped` к каждой кнопке с задержкой 130ms между ними. CSS `@keyframes messenger-pop` анимирует scale.
-
-### Тикер (бегущая строка)
-`.ticker-inner` содержит 14 элементов (7 уникальных × 2 для бесшовного цикла). CSS animation `ticker-scroll` двигает на `-50%` за 32s. При hover — `animation-play-state: paused`.
+### Еженедельное расписание
+JS-IIFE. Данные: `BASE[6][4]` × `PROGRAMS[5].scale`. Google Sheets CSV (не работает на file://).
 
 ---
 
-## Известные placeholder-данные (нужно заменить на реальные)
+## Известные placeholder-данные (заменить на реальные)
 
-| Место | Текущее значение | Что нужно |
-|-------|-----------------|-----------|
-| Телефон хедер | `+7 (900) 000-00-00` | Реальный номер |
-| `tel:` href | `tel:+79000000000` | Реальный номер |
+| Место | Текущее | Нужно |
+|-------|---------|-------|
+| Телефон | `+7 (900) 000-00-00` | Реальный |
+| `tel:` href | `tel:+79000000000` | Реальный |
 | Адрес Сургут | `Сургут, ул. Энергетиков, 28` | Реальный |
 | Адрес Нефтеюганск | `Нефтеюганск, мкр. 16, 2` | Реальный |
-| Ссылка Max | `href="#"` в `.messenger-btn` | Реальная ссылка |
-| Ссылка Telegram | `https://t.me/vibiraiedu` | Реальный username |
+| Ссылка Max | `href="#"` | Реальная |
+| Telegram | `https://t.me/vibiraiedu` | Реальный username |
 | Почта | `info@vibiraiedu.ru` | Реальная |
-| Сайт в футере | `vibiraiedu.ru` | Реальный домен |
 
 ---
 
 ## Браузерная совместимость
 
-Все Safari-фиксы уже применены:
-- `min-height: 100vh; min-height: 100svh` — fallback для Safari < 15.4
-- `top:0; right:0; bottom:0; left:0` вместо `inset: 0` — fallback для Safari < 14.1
-- `-webkit-backdrop-filter` — рядом с `backdrop-filter` везде
-- `z-index: 0` рядом с `isolation: isolate` — fallback для Safari < 15
-- FAQ accordion JS-fallback для Safari < 16
+Safari фиксы применены:
+- `min-height: 100svh` + fallback `100vh`
+- `top/right/bottom/left: 0` вместо `inset: 0`
+- `-webkit-backdrop-filter` везде рядом с `backdrop-filter`
+- FAQ JS-fallback для Safari < 16
 
 ---
 
-## Правила стиля (taste-skill + frontend-design)
+## Правила стиля
 
-Эти правила применялись при разработке — соблюдать при продолжении:
-
-- **Нет em-дашей** (`—`) в UI-тексте, только дефис (`-`) или пробел
-- **Максимум 1 eyebrow** (маленький текст над заголовком золотом) на 3 секции
+- **Нет emoji** в UI — только SVG или PNG иконки
 - **Нет scroll cues** (стрелок "прокрутите вниз")
-- **Нет emoji** в UI — только SVG-иконки или PNG
-- **Изображения** — только реальные фото из `images/menu/`, не placeholder сервисы
-- **Не повторять layout** — каждая секция визуально отличается от соседних
-- **`--text-muted`** (#4A5E4F) — не использовать для читаемого текста, только для декора
+- **`--text-muted`** (#4D7A5F) — только для декора, не для читаемого текста
+- **Каждая секция** визуально отличается от соседних
+- **Изображения** — только реальные фото из `images/menu/`
 
 ---
 
 ## Что можно улучшить / продолжить
 
-- Подключить реальную отправку формы (сейчас просто меняет текст кнопки)
-- Добавить больше блюд в секцию меню (сейчас 6)
-- Добавить страницу "Меню" с полным списком блюд и фильтрацией по программе
-- Добавить галерею / отзывы клиентов
+- Подключить реальную отправку формы (сейчас меняет текст кнопки)
 - Заменить placeholder-данные на реальные (телефон, адреса, мессенджеры)
-- Добавить реальный Яндекс.Карты или Google Maps iframe в блок контактов
-- SEO: добавить `<meta description>`, `og:image`, `og:title`
+- Добавить Яндекс.Карты iframe в блок контактов
+- SEO: `<meta description>`, `og:image`, `og:title`
+- Добавить страницу с полным меню и фильтрацией

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- HEADER -->
     <header class="header" id="header">
@@ -92,9 +93,10 @@
                 </div>
                 <div class="stat-item reveal-up delay-1">
                     <div class="stat-num-row">
-                        <span class="stat-number" data-target="4">0</span>
+                        <span class="stat-number" data-target="500">0</span>
+                        <span class="stat-plus">+</span>
                     </div>
-                    <span class="stat-label">недели без повторов</span>
+                    <span class="stat-label">довольных клиентов</span>
                 </div>
                 <div class="stat-item reveal-up delay-2">
                     <div class="stat-num-row">
@@ -171,6 +173,33 @@
         </div>
     </section>
 
+    <!-- MONUMENTAL STRIP -->
+    <div class="mono-strip">
+        <div class="container">
+            <div class="mono-strip-inner">
+                <div class="mono-item">
+                    <span class="mono-num">500<sup>+</sup></span>
+                    <span class="mono-label">клиентов</span>
+                </div>
+                <div class="mono-sep"></div>
+                <div class="mono-item">
+                    <span class="mono-num">200<sup>+</sup></span>
+                    <span class="mono-label">блюд в меню</span>
+                </div>
+                <div class="mono-sep"></div>
+                <div class="mono-item">
+                    <span class="mono-num">2<sup>кг</sup></span>
+                    <span class="mono-label">в среднем за неделю</span>
+                </div>
+                <div class="mono-sep"></div>
+                <div class="mono-item">
+                    <span class="mono-num">0</span>
+                    <span class="mono-label">повторов за 4 недели</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- HOW IT WORKS -->
     <section class="how" id="how">
         <div class="container">
@@ -178,23 +207,47 @@
                 <h2 class="section-title">Как это <em>работает</em></h2>
                 <p class="section-sub">Три шага, и правильное питание у вашей двери</p>
             </div>
-            <div class="steps-grid">
-                <div class="step reveal-up delay-1">
-                    <div class="step-num">01</div>
-                    <h3>Выберите программу</h3>
-                    <p>Воспользуйтесь калькулятором или проконсультируйтесь с нами, чтобы найти подходящий рацион под ваши цели.</p>
+            <div class="steps-flow">
+                <div class="step-flow-item reveal-up delay-1">
+                    <div class="step-flow-left">
+                        <div class="step-flow-num">01</div>
+                        <div class="step-flow-line"></div>
+                    </div>
+                    <div class="step-flow-right">
+                        <div class="step-flow-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <h3>Выберите программу</h3>
+                        <p>Воспользуйтесь калькулятором калорий или позвоните нам - подберём рацион под ваши цели, вес и образ жизни.</p>
+                        <a href="#calculator" class="step-flow-link">Рассчитать калории →</a>
+                    </div>
                 </div>
-                <div class="step-divider reveal-fade delay-1"></div>
-                <div class="step reveal-up delay-2">
-                    <div class="step-num">02</div>
-                    <h3>Мы готовим</h3>
-                    <p>Повара ежедневно готовят свежие блюда из натуральных продуктов по вашему индивидуальному КБЖУ.</p>
+                <div class="step-flow-item reveal-up delay-2">
+                    <div class="step-flow-left">
+                        <div class="step-flow-num">02</div>
+                        <div class="step-flow-line"></div>
+                    </div>
+                    <div class="step-flow-right">
+                        <div class="step-flow-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9c0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-2.31C18.16 18.67 21 15.17 21 11a9 9 0 0 0-9-9Z"/><path d="M12 8v4l2 2"/></svg>
+                        </div>
+                        <h3>Повара готовят для вас</h3>
+                        <p>Каждый день - свежие блюда из натуральных продуктов. Никаких консервантов. Расчёт под ваш персональный КБЖУ.</p>
+                        <div class="step-flow-badge">Ежедневно</div>
+                    </div>
                 </div>
-                <div class="step-divider reveal-fade delay-2"></div>
-                <div class="step reveal-up delay-3">
-                    <div class="step-num">03</div>
-                    <h3>Получайте и ешьте</h3>
-                    <p>Доставка 3-4 раза в неделю прямо до вашей двери. Разогрейте за 3 минуты и наслаждайтесь.</p>
+                <div class="step-flow-item reveal-up delay-3">
+                    <div class="step-flow-left">
+                        <div class="step-flow-num">03</div>
+                    </div>
+                    <div class="step-flow-right">
+                        <div class="step-flow-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </div>
+                        <h3>Получайте и наслаждайтесь</h3>
+                        <p>Доставка 3-4 раза в неделю прямо до вашей двери. Разогрейте за 3 минуты - и обед готов. Без готовки, без грязной посуды.</p>
+                        <a href="#order" class="step-flow-link">Начать сейчас →</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -208,63 +261,118 @@
                 <h2 class="section-title">Выберите <em>свою программу</em></h2>
                 <p class="section-sub">Пять направлений - одно из них создано именно для вас</p>
             </div>
-            <div class="programs-grid">
-                <div class="program-card reveal-up delay-1">
-                    <div class="program-kcal">900<span>ккал / день</span></div>
-                    <h3 class="program-title">Похудение</h3>
-                    <p class="program-desc">Дефицит калорий, высокое содержание белка, минимум простых углеводов. Минус 2 кг в неделю.</p>
-                    <ul class="program-perks">
-                        <li>Расчёт по вашему КБЖУ</li>
-                        <li>Контроль порций</li>
-                        <li>Без чувства голода</li>
-                    </ul>
-                    <a href="#order" class="btn btn-outline">Подобрать</a>
+            <!-- Goal selector tabs -->
+            <div class="prog-goals reveal-up delay-1">
+                <button class="prog-goal active" data-prog="0">
+                    <span class="prog-goal-title">Похудение</span>
+                    <span class="prog-goal-sub">от 900 ккал</span>
+                </button>
+                <button class="prog-goal" data-prog="1">
+                    <span class="prog-goal-title">Поддержание</span>
+                    <span class="prog-goal-sub">от 1 200 ккал</span>
+                </button>
+                <button class="prog-goal" data-prog="2">
+                    <span class="prog-goal-title">Сбалансированное</span>
+                    <span class="prog-goal-sub">от 1 800 ккал</span>
+                </button>
+                <button class="prog-goal" data-prog="3">
+                    <span class="prog-goal-title">Набор массы</span>
+                    <span class="prog-goal-sub">от 2 500 ккал</span>
+                </button>
+                <button class="prog-goal" data-prog="4">
+                    <span class="prog-goal-title">Как дома</span>
+                    <span class="prog-goal-sub">от 3 000 ккал</span>
+                </button>
+            </div>
+
+            <!-- Program detail + pricing panel -->
+            <div class="prog-panel reveal-up delay-2">
+                <div class="prog-panel-left">
+                    <div class="prog-panel-photo">
+                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt="Похудение">
+                        <span class="prog-panel-photo-label" id="progTag">Для похудения</span>
+                    </div>
+                    <div class="prog-panel-meta">
+                        <div class="prog-panel-kcal" id="progKcal">900 ккал / день</div>
+                        <p class="prog-panel-desc" id="progDesc">Дефицит калорий, высокое содержание белка, минимум простых углеводов. Минус 2 кг в неделю.</p>
+                        <ul class="prog-panel-perks" id="progPerks">
+                            <li>Расчёт по вашему КБЖУ</li>
+                            <li>Контроль порций</li>
+                            <li>Без чувства голода</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="program-card reveal-up delay-2">
-                    <div class="program-kcal">1 200<span>ккал / день</span></div>
-                    <h3 class="program-title">Поддержание</h3>
-                    <p class="program-desc">Сбалансированный рацион для тех, кто уже достиг нужного веса и хочет его удержать.</p>
-                    <ul class="program-perks">
-                        <li>Полный набор нутриентов</li>
-                        <li>4 недели разных блюд</li>
-                        <li>Лёгкость и энергия</li>
-                    </ul>
-                    <a href="#order" class="btn btn-outline">Подобрать</a>
+                <div class="prog-panel-right">
+                    <div class="prog-pricing-label">Выберите срок доставки</div>
+                    <div class="prog-prices" id="progPrices">
+                        <!-- Rendered by JS -->
+                    </div>
+                    <a href="#order" class="btn btn-primary prog-order-btn">Заказать программу</a>
+                    <p class="prog-order-note">Бесплатная консультация по подбору рациона</p>
                 </div>
-                <div class="program-card program-card--featured reveal-up delay-2">
-                    <div class="program-badge">Популярное</div>
-                    <div class="program-kcal">1 800<span>ккал / день</span></div>
-                    <h3 class="program-title">Сбалансированное</h3>
-                    <p class="program-desc">Идеальный баланс для активного образа жизни. Вкусно, сытно и полезно каждый день.</p>
-                    <ul class="program-perks">
-                        <li>Подходит большинству</li>
-                        <li>Разнообразное меню</li>
-                        <li>Для спортивного режима</li>
-                    </ul>
-                    <a href="#order" class="btn btn-primary">Подобрать</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS / TESTIMONIALS -->
+    <section class="results" id="results">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <div class="section-eyebrow">Результаты клиентов</div>
+                <h2 class="section-title">Реальные <em>истории</em></h2>
+                <p class="section-sub">Более 500 клиентов уже изменили свою жизнь с нами</p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card reveal-up delay-1">
+                    <div class="result-top">
+                        <div class="result-avatar">АМ</div>
+                        <div class="result-meta">
+                            <div class="result-stat">-8 кг</div>
+                            <div class="result-period">за 6 недель</div>
+                        </div>
+                    </div>
+                    <blockquote class="result-quote">«Наконец-то не думаю что приготовить. Всё вкусное, порции большие - и вес уходит сам собой»</blockquote>
+                    <div class="result-person">
+                        <strong>Анна М.</strong>
+                        <span>Сургут · Программа «Похудение»</span>
+                    </div>
+                    <div class="result-stars">★★★★★</div>
                 </div>
-                <div class="program-card reveal-up delay-3">
-                    <div class="program-kcal">2 500<span>ккал / день</span></div>
-                    <h3 class="program-title">Набор массы</h3>
-                    <p class="program-desc">Профицит калорий с высоким содержанием белка для роста мышечной массы и силы.</p>
-                    <ul class="program-perks">
-                        <li>Для спортсменов</li>
-                        <li>Высокий процент белка</li>
-                        <li>Комплексные углеводы</li>
-                    </ul>
-                    <a href="#order" class="btn btn-outline">Подобрать</a>
+                <div class="result-card reveal-up delay-2">
+                    <div class="result-top">
+                        <div class="result-avatar">ДК</div>
+                        <div class="result-meta">
+                            <div class="result-stat">+5 кг</div>
+                            <div class="result-period">мышечной массы</div>
+                        </div>
+                    </div>
+                    <blockquote class="result-quote">«Занимаюсь в зале 4 раза в неделю. С этим питанием прогресс пошёл быстрее - белка хватает»</blockquote>
+                    <div class="result-person">
+                        <strong>Дмитрий К.</strong>
+                        <span>Нефтеюганск · Программа «Набор массы»</span>
+                    </div>
+                    <div class="result-stars">★★★★★</div>
                 </div>
-                <div class="program-card reveal-up delay-3">
-                    <div class="program-kcal">3 000<span>ккал / день</span></div>
-                    <h3 class="program-title">Как дома</h3>
-                    <p class="program-desc">Домашняя кухня в профессиональном исполнении. Привычные блюда из натуральных продуктов.</p>
-                    <ul class="program-perks">
-                        <li>Уютные блюда</li>
-                        <li>Без строгих ограничений</li>
-                        <li>Семейные рецепты</li>
-                    </ul>
-                    <a href="#order" class="btn btn-outline">Подобрать</a>
+                <div class="result-card reveal-up delay-3">
+                    <div class="result-top">
+                        <div class="result-avatar">ЕС</div>
+                        <div class="result-meta">
+                            <div class="result-stat">3 мес.</div>
+                            <div class="result-period">на программе</div>
+                        </div>
+                    </div>
+                    <blockquote class="result-quote">«Начала с похудения, перешла на сбалансированное. Уже не хочется готовить самой - слишком вкусно»</blockquote>
+                    <div class="result-person">
+                        <strong>Елена С.</strong>
+                        <span>Сургут · Программа «Сбалансированное»</span>
+                    </div>
+                    <div class="result-stars">★★★★★</div>
                 </div>
+            </div>
+            <div class="results-bar reveal-up">
+                <div class="results-bar-num">500<span>+</span></div>
+                <div class="results-bar-text">клиентов доверяют нам своё питание<br>в Сургуте и Нефтеюганске</div>
+                <a href="#order" class="btn btn-primary">Присоединиться</a>
             </div>
         </div>
     </section>
@@ -354,6 +462,37 @@
                 <p class="section-sub">Выберите программу — и увидите точное расписание питания на каждый день</p>
             </div>
 
+            <!-- Dish gallery — always visible -->
+            <div class="dish-gallery reveal-up delay-1">
+                <div class="dish-gallery-grid">
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/tuna-salad.jpeg" alt="Тунец с салатом" loading="lazy">
+                        <div class="dish-gallery-label">Салат с тунцом</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/chicken-breast.jpeg" alt="Куриная грудка" loading="lazy">
+                        <div class="dish-gallery-label">Куриная грудка</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/oatmeal-berries.jpeg" alt="Овсяная каша с ягодами" loading="lazy">
+                        <div class="dish-gallery-label">Овсяная каша</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/beef-steak.jpeg" alt="Говяжий стейк" loading="lazy">
+                        <div class="dish-gallery-label">Говяжий стейк</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/chicken-soup.jpeg" alt="Куриный суп" loading="lazy">
+                        <div class="dish-gallery-label">Куриный суп</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/protein-box.jpeg" alt="Белковый бокс" loading="lazy">
+                        <div class="dish-gallery-label">Белковый бокс</div>
+                    </div>
+                </div>
+                <p class="dish-gallery-note">Более 200 блюд в ротации - каждые 4 недели меняется всё меню</p>
+            </div>
+
             <!-- Program selector -->
             <div class="sched-programs reveal-up delay-1">
                 <button class="sched-prog active" data-prog="0">
@@ -425,6 +564,7 @@
 
                 <div class="faq-item reveal-up delay-1">
                     <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-num">01</span>
                         <span>Как оформить заказ?</span>
                         <span class="faq-icon" aria-hidden="true"></span>
                     </button>
@@ -437,6 +577,7 @@
 
                 <div class="faq-item reveal-up delay-2">
                     <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-num">02</span>
                         <span>Не надоест ли одно и то же?</span>
                         <span class="faq-icon" aria-hidden="true"></span>
                     </button>
@@ -449,6 +590,7 @@
 
                 <div class="faq-item reveal-up delay-3">
                     <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-num">03</span>
                         <span>Можно ли перенести или отменить доставку?</span>
                         <span class="faq-icon" aria-hidden="true"></span>
                     </button>
@@ -461,6 +603,7 @@
 
                 <div class="faq-item reveal-up delay-1">
                     <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-num">04</span>
                         <span>Реально ли похудеть на вашем питании?</span>
                         <span class="faq-icon" aria-hidden="true"></span>
                     </button>
@@ -473,6 +616,7 @@
 
                 <div class="faq-item reveal-up delay-2">
                     <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-num">05</span>
                         <span>Как часто меняется меню?</span>
                         <span class="faq-icon" aria-hidden="true"></span>
                     </button>
@@ -485,6 +629,7 @@
 
                 <div class="faq-item reveal-up delay-3">
                     <button class="faq-question" aria-expanded="false">
+                        <span class="faq-q-num">06</span>
                         <span>Можно ли изменить время и адрес доставки?</span>
                         <span class="faq-icon" aria-hidden="true"></span>
                     </button>
@@ -625,6 +770,7 @@
                     <ul>
                         <li><a href="#about">О нас</a></li>
                         <li><a href="#how">Как работаем</a></li>
+                        <li><a href="#results">Результаты</a></li>
                         <li><a href="#menu">Меню</a></li>
                         <li><a href="#calculator">Калькулятор</a></li>
                     </ul>
@@ -642,6 +788,13 @@
             </div>
         </div>
     </footer>
+
+    <div class="mobile-cta-bar" id="mobileCta">
+        <a href="#order" class="btn btn-primary">Выбрать программу</a>
+        <button class="mobile-cta-close" id="mobileCtaClose" aria-label="Закрыть">×</button>
+    </div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
 
     <script src="script.js"></script>
 </body>

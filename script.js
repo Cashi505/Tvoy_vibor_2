@@ -606,3 +606,204 @@ const navObserver = new IntersectionObserver(
 );
 
 sections.forEach(s => navObserver.observe(s));
+
+/* ============================================
+   SCROLL PROGRESS BAR (E3)
+   ============================================ */
+const scrollProgress = document.getElementById('scrollProgress');
+if (scrollProgress) {
+    window.addEventListener('scroll', () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress.style.width = (window.scrollY / max * 100) + '%';
+    }, { passive: true });
+}
+
+/* ============================================
+   HERO VIDEO PARALLAX (C2)
+   ============================================ */
+(function() {
+    const vid = document.getElementById('heroVideo');
+    if (!vid || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < window.innerHeight * 1.2) {
+            vid.style.transform = `translateY(${y * 0.28}px) scale(1.05)`;
+        }
+    }, { passive: true });
+})();
+
+/* ============================================
+   MOBILE STICKY CTA (C3)
+   ============================================ */
+(function() {
+    const bar  = document.getElementById('mobileCta');
+    const close = document.getElementById('mobileCtaClose');
+    if (!bar) return;
+    let dismissed = false;
+    const hero = document.getElementById('hero');
+    const cta  = document.getElementById('order');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (dismissed) return;
+            if (!e.isIntersecting && e.target === hero) bar.classList.add('visible');
+            if (e.isIntersecting && e.target === cta)  bar.classList.remove('visible');
+        });
+    }, { threshold: 0.1 });
+    if (hero) obs.observe(hero);
+    if (cta)  obs.observe(cta);
+    if (close) close.addEventListener('click', () => {
+        dismissed = true;
+        bar.classList.remove('visible');
+    });
+})();
+
+/* ============================================
+   CUSTOM CURSOR (E1)
+   ============================================ */
+(function() {
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    if (!dot || !ring) return;
+    let mx = -50, my = -50, rx = -50, ry = -50, started = false;
+    document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+        if (!started) {
+            started = true;
+            dot.style.opacity = '1';
+            ring.style.opacity = '0.7';
+        }
+    }, { passive: true });
+    (function animRing() {
+        rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(animRing);
+    })();
+    const hoverEls = 'a,button,[role="button"],.program-card,.faq-question,.result-card';
+    document.querySelectorAll(hoverEls).forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+    });
+})();
+
+/* ============================================
+   INTERACTIVE PROGRAMS + PRICING
+   ============================================ */
+(function() {
+    // ━━━ ЦЕНЫ — обновите здесь ━━━━━━━━━━━━━━
+    const PROG_DATA = [
+        {
+            name: 'Похудение', kcal: '900 ккал / день', tag: 'Для похудения',
+            photo: 'images/menu/tuna-salad.jpeg',
+            desc: 'Дефицит калорий, высокое содержание белка, минимум простых углеводов. Минус 2 кг в неделю.',
+            perks: ['Расчёт по вашему КБЖУ', 'Контроль порций', 'Без чувства голода'],
+            prices: [
+                { label: 'Пробный',  days: '2 дня',   price: 1400,  perDay: 700  },
+                { label: '1 неделя', days: '5 дней',  price: 3200,  perDay: 640, discount: 9  },
+                { label: '2 недели', days: '10 дней', price: 5800,  perDay: 580, discount: 17, popular: true },
+                { label: '1 месяц',  days: '22 дня',  price: 10900, perDay: 495, discount: 29 },
+            ]
+        },
+        {
+            name: 'Поддержание', kcal: '1 200 ккал / день', tag: 'Для поддержания',
+            photo: 'images/menu/oatmeal-berries.jpeg',
+            desc: 'Сбалансированный рацион для тех, кто уже достиг нужного веса и хочет его удержать.',
+            perks: ['Полный набор нутриентов', '4 недели разных блюд', 'Лёгкость и энергия'],
+            prices: [
+                { label: 'Пробный',  days: '2 дня',   price: 1800,  perDay: 900  },
+                { label: '1 неделя', days: '5 дней',  price: 4100,  perDay: 820, discount: 9  },
+                { label: '2 недели', days: '10 дней', price: 7400,  perDay: 740, discount: 18, popular: true },
+                { label: '1 месяц',  days: '22 дня',  price: 14200, perDay: 645, discount: 28 },
+            ]
+        },
+        {
+            name: 'Сбалансированное', kcal: '1 800 ккал / день', tag: 'Для всех',
+            photo: 'images/menu/chicken-breast.jpeg',
+            desc: 'Идеальный баланс для активного образа жизни. Вкусно, сытно и полезно каждый день.',
+            perks: ['Подходит большинству', 'Разнообразное меню', 'Для спортивного режима'],
+            prices: [
+                { label: 'Пробный',  days: '2 дня',   price: 2400,  perDay: 1200  },
+                { label: '1 неделя', days: '5 дней',  price: 5400,  perDay: 1080, discount: 10 },
+                { label: '2 недели', days: '10 дней', price: 9800,  perDay: 980,  discount: 18, popular: true },
+                { label: '1 месяц',  days: '22 дня',  price: 18700, perDay: 850,  discount: 29 },
+            ]
+        },
+        {
+            name: 'Набор массы', kcal: '2 500 ккал / день', tag: 'Для спортсменов',
+            photo: 'images/menu/beef-steak.jpeg',
+            desc: 'Профицит калорий с высоким содержанием белка для роста мышечной массы и силы.',
+            perks: ['Для спортсменов', 'Высокий процент белка', 'Комплексные углеводы'],
+            prices: [
+                { label: 'Пробный',  days: '2 дня',   price: 3000,  perDay: 1500  },
+                { label: '1 неделя', days: '5 дней',  price: 6700,  perDay: 1340, discount: 11 },
+                { label: '2 недели', days: '10 дней', price: 12200, perDay: 1220, discount: 19, popular: true },
+                { label: '1 месяц',  days: '22 дня',  price: 23300, perDay: 1060, discount: 29 },
+            ]
+        },
+        {
+            name: 'Как дома', kcal: '3 000 ккал / день', tag: 'Без ограничений',
+            photo: 'images/menu/chicken-soup.jpeg',
+            desc: 'Домашняя кухня в профессиональном исполнении. Привычные блюда из натуральных продуктов.',
+            perks: ['Уютные блюда', 'Без строгих ограничений', 'Семейные рецепты'],
+            prices: [
+                { label: 'Пробный',  days: '2 дня',   price: 3500,  perDay: 1750  },
+                { label: '1 неделя', days: '5 дней',  price: 7900,  perDay: 1580, discount: 10 },
+                { label: '2 недели', days: '10 дней', price: 14300, perDay: 1430, discount: 18, popular: true },
+                { label: '1 месяц',  days: '22 дня',  price: 27500, perDay: 1250, discount: 29 },
+            ]
+        },
+    ];
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    const goals  = document.querySelectorAll('.prog-goal');
+    const panel  = document.querySelector('.prog-panel');
+    const photo  = document.getElementById('progPhoto');
+    const tag    = document.getElementById('progTag');
+    const kcalEl = document.getElementById('progKcal');
+    const descEl = document.getElementById('progDesc');
+    const perksEl= document.getElementById('progPerks');
+    const pricesEl= document.getElementById('progPrices');
+
+    if (!goals.length || !panel) return;
+
+    function fmt(n) {
+        return n.toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function renderProg(idx) {
+        const p = PROG_DATA[idx];
+        panel.classList.add('prog-panel--fading');
+
+        setTimeout(() => {
+            photo.src = p.photo;
+            photo.alt = p.name;
+            tag.textContent = p.tag;
+            kcalEl.textContent = p.kcal;
+            descEl.textContent = p.desc;
+            perksEl.innerHTML = p.perks.map(t => `<li>${t}</li>`).join('');
+
+            pricesEl.innerHTML = p.prices.map(pr => `
+                <a href="#order" class="price-card${pr.popular ? ' price-card--popular' : ''}">
+                    ${pr.popular ? '<span class="price-card-badge">Хит</span>' : ''}
+                    <div class="price-card-label">${pr.label}</div>
+                    <div class="price-card-days">${pr.days}</div>
+                    <div class="price-card-price">${fmt(pr.price)}</div>
+                    <div class="price-card-per">${fmt(pr.perDay)} / день</div>
+                    ${pr.discount ? `<div class="price-card-discount">-${pr.discount}%</div>` : ''}
+                </a>
+            `).join('');
+
+            panel.classList.remove('prog-panel--fading');
+        }, 220);
+    }
+
+    goals.forEach(btn => {
+        btn.addEventListener('click', () => {
+            goals.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProg(+btn.dataset.prog);
+        });
+    });
+
+    renderProg(0);
+})();
