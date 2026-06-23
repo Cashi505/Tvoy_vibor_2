@@ -108,7 +108,7 @@ em { font-style: italic; }
     font-weight: 500;
     letter-spacing: 0.04em;
     cursor: pointer;
-    transition: all 0.35s var(--ease);
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
     border: 2px solid transparent;
     white-space: nowrap;
     background: none;
@@ -149,7 +149,8 @@ em { font-style: italic; }
     padding: 0.6rem 1.4rem;
     font-size: 0.84rem;
 }
-.btn-nav:hover { background: var(--green-light); }
+.btn-nav:hover { background: var(--green-light); transform: translateY(-1px); }
+.btn-nav:active { transform: translateY(0) scale(0.97); }
 .btn-large { padding: 1rem 2.5rem; font-size: 1rem; }
 
 /* ============================================
@@ -1941,18 +1942,8 @@ body::after { opacity: 0.062; }
         radial-gradient(ellipse 40% 50% at  8% 68%, rgba(47,200,110,0.07) 0%, transparent 52%),
         var(--bg-dark);
 }
-.programs {
-    background:
-        radial-gradient(ellipse 65% 55% at  6% 82%, rgba(47,200,110,0.12) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 45% at 94% 14%, rgba(47,200,110,0.09) 0%, transparent 50%),
-        var(--bg-section);
-}
-.how {
-    background:
-        radial-gradient(ellipse 62% 52% at 50%  0%, rgba(47,200,110,0.10) 0%, transparent 60%),
-        radial-gradient(ellipse 45% 42% at 82% 100%,rgba(47,200,110,0.07) 0%, transparent 55%),
-        var(--bg-section);
-}
+.programs { background: var(--bg-section); }
+.how { background: #FFFFFF; }
 .calculator {
     background:
         radial-gradient(ellipse 62% 58% at 50% 55%, rgba(47,200,110,0.09) 0%, transparent 60%),
@@ -2235,44 +2226,7 @@ body::after { opacity: 0.062; }
 /* ============================================
    CUSTOM CURSOR (E1)
    ============================================ */
-@media (hover: hover) and (pointer: fine) {
-    body { cursor: none; }
-    a, button, [role="button"], .program-card, .faq-question, .step { cursor: none; }
-}
-.cursor-dot {
-    position: fixed;
-    left: -50px; top: -50px;
-    width: 6px; height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10000;
-    transform: translate(-50%, -50%);
-    transition: background 0.2s, transform 0.1s, opacity 0.3s;
-    display: none;
-    opacity: 0;
-}
-.cursor-ring {
-    position: fixed;
-    left: -50px; top: -50px;
-    width: 30px; height: 30px;
-    border: 1.5px solid var(--green);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: border-color 0.2s, width 0.25s var(--ease), height 0.25s var(--ease), opacity 0.3s;
-    display: none;
-    opacity: 0;
-}
-@media (hover: hover) and (pointer: fine) {
-    .cursor-dot, .cursor-ring { display: block; }
-}
-.cursor-ring.hovered {
-    width: 50px; height: 50px;
-    border-color: var(--gold);
-    opacity: 0.5;
-}
+/* Кастомный курсор удалён */
 
 /* ============================================
    ABOUT heading — smaller, more refined (D1)
@@ -2686,6 +2640,7 @@ body::after { opacity: 0.062; }
     text-transform: uppercase;
     color: var(--text-muted);
     margin: 0 0 1.1rem;
+    text-align: center;
 }
 .dish-gallery-note {
     text-align: center;
@@ -2919,16 +2874,15 @@ body::after { opacity: 0.062; }
 }
 
 /* ── Step 2: sub-programs ── */
-.prog-subs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.prog-subs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .prog-sub-card {
     border: 2px solid rgba(0,0,0,0.14);
     border-radius: var(--radius);
-    padding: 0.9rem 1.4rem;
+    padding: 0.6rem 1.1rem;
     cursor: pointer;
     transition: all 0.22s var(--ease);
     background: #FFFFFF;
-    min-width: 170px;
-    text-align: left;
+    text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 .prog-sub-card:hover { border-color: var(--green); }
@@ -2948,14 +2902,14 @@ body::after { opacity: 0.062; }
     transition: color 0.22s;
 }
 .prog-sub-name {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--green);
     line-height: 1.2;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.1rem;
     transition: color 0.22s;
 }
-.prog-sub-kcal { font-size: 0.75rem; color: var(--text-muted); transition: color 0.22s; }
+.prog-sub-kcal { font-size: 0.72rem; color: var(--text-muted); transition: color 0.22s; }
 
 .prog-sub-card.active .prog-sub-goal { color: rgba(255,255,255,0.7); }
 .prog-sub-card.active .prog-sub-name { color: #FFFFFF; }
@@ -3065,8 +3019,11 @@ body::after { opacity: 0.062; }
 /* Responsive */
 @media (max-width: 960px) {
     .prog-panel { grid-template-columns: 1fr; }
-    .prog-panel-right { padding: 1.5rem; border-left: none; border-top: 1px solid var(--border); }
-    .prog-panel-photo { aspect-ratio: 4/3; }
+    /* Порядок: фото → ккал → описание → буллеты → Шаг 3 → плитки → ИТОГО → кнопка */
+    .prog-panel-left  { grid-row: 1; }
+    .prog-panel-right { grid-row: 2; padding: 1.5rem; border-left: none; border-top: 1px solid var(--border); }
+    .prog-panel-photo { aspect-ratio: 3/2; }
+    .prog-panel-photo img { object-position: top; }
 }
 @media (max-width: 640px) {
     /* Шаг 1 — 2 кнопки в ряд (2×2 сетка) */
@@ -3083,7 +3040,15 @@ body::after { opacity: 0.062; }
     .prog-panel-right { padding: 1.1rem 0.9rem; gap: 0.7rem; }
     .prog-step-wrap { margin-bottom: 0.9rem; }
     .prog-step-label { font-size: 0.9rem; margin-bottom: 0.65rem; }
-    .prog-durations { grid-auto-columns: minmax(78px, 1fr); gap: 0.3rem; padding: 0.15rem 0.05rem 0.4rem; }
+    /* Шаг 3 — сетка 3×2 вместо горизонтального скролла: все плитки видны сразу */
+    .prog-durations {
+        grid-auto-flow: row;
+        grid-auto-columns: auto;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: hidden;
+        gap: 0.4rem;
+        padding: 0.1rem 0 0.3rem;
+    }
     .dur-card { padding: 0.55rem 0.35rem; gap: 0.12rem; }
     .dur-card-price { font-size: 1rem; margin-top: 0.12rem; }
     .dur-card-label { font-size: 0.67rem; }

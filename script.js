@@ -569,20 +569,7 @@ if (messengerBtns) messengerObserver.observe(messengerBtns);
     })();
 })();
 
-/* ============================================
-   PRIMARY BUTTONS — MAGNETIC HOVER
-   ============================================ */
-document.querySelectorAll('.btn-primary, .btn-nav').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = (e.clientX - rect.left - rect.width  / 2) * 0.25;
-        const y = (e.clientY - rect.top  - rect.height / 2) * 0.25;
-        btn.style.transform = `translate(${x}px, ${y}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-    });
-});
+/* Hover/active эффекты кнопок — управляются через CSS */
 
 /* ============================================
    NAV ACTIVE STATE
@@ -657,34 +644,7 @@ if (scrollProgress) {
     });
 })();
 
-/* ============================================
-   CUSTOM CURSOR (E1)
-   ============================================ */
-(function() {
-    const dot  = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    if (!dot || !ring) return;
-    let mx = -50, my = -50, rx = -50, ry = -50, started = false;
-    document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-        if (!started) {
-            started = true;
-            dot.style.opacity = '1';
-            ring.style.opacity = '0.7';
-        }
-    }, { passive: true });
-    (function animRing() {
-        rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
-        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-        requestAnimationFrame(animRing);
-    })();
-    const hoverEls = 'a,button,[role="button"],.program-card,.faq-question,.result-card';
-    document.querySelectorAll(hoverEls).forEach(el => {
-        el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
-        el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
-    });
-})();
+/* Кастомный курсор удалён — используется стандартный курсор браузера */
 
 
 /* ============================================
@@ -695,6 +655,7 @@ if (scrollProgress) {
         {
             name: 'Снижение веса', sub: 'от 900 ккал',
             photo: 'images/people/weight-loss.jpg',
+            photoMobile: 'images/people/weight-loss-mobile.jpg',
             fallback: 'images/menu/tuna-salad.jpeg',
             programs: [
                 {
@@ -727,6 +688,7 @@ if (scrollProgress) {
         {
             name: 'Не хочу готовить', sub: 'от 1 200 ккал',
             photo: 'images/people/no-cooking.jpg',
+            photoMobile: 'images/people/no-cooking-mobile.jpg',
             fallback: 'images/menu/oatmeal-berries.jpeg',
             programs: [
                 {
@@ -746,6 +708,7 @@ if (scrollProgress) {
         {
             name: 'Баланс', sub: 'от 1 800 ккал',
             photo: 'images/people/balance.jpg',
+            photoMobile: 'images/people/balance-mobile.jpg',
             fallback: 'images/menu/chicken-breast.jpeg',
             programs: [
                 {
@@ -777,6 +740,7 @@ if (scrollProgress) {
         {
             name: 'Набор массы', sub: 'от 3 000 ккал',
             photo: 'images/people/mass-gain.jpg',
+            photoMobile: 'images/people/mass-gain-mobile.jpg',
             fallback: 'images/menu/beef-steak.jpeg',
             programs: [
                 {
@@ -820,7 +784,7 @@ if (scrollProgress) {
             <div class="dur-card${i === 0 ? ' active' : ''}" data-price="${pr.price}">
                 ${badge}
                 <div class="dur-card-label">${pr.label}</div>
-                <div class="dur-card-old"${pr.oldPrice ? '' : ' style="visibility:hidden"'}>${pr.oldPrice ? fmt(pr.oldPrice) : ' '}</div>
+                <div class="dur-card-old"${pr.oldPrice ? '' : ' style="opacity:0"'}>${pr.oldPrice ? fmt(pr.oldPrice) : ' '}</div>
                 <div class="dur-card-price">${fmt(pr.price)}</div>
                 <div class="dur-card-per">${fmt(pr.perDay)} / день</div>
                 ${pr.discountPct ? `<div class="dur-card-discount">-${pr.discountPct}%</div>` : ''}
@@ -856,7 +820,8 @@ if (scrollProgress) {
         /* Фото меняется только при смене цели (Шаг 1) */
         delete photoEl.dataset.fb;
         photoEl.dataset.fallback = goal.fallback || '';
-        photoEl.src = goal.photo;
+        const isMobile = window.matchMedia('(max-width: 960px)').matches;
+        photoEl.src = (isMobile && goal.photoMobile) ? goal.photoMobile : goal.photo;
         photoEl.alt = goal.name;
 
         /* Шаг 2 — всегда виден, даже если программа одна */
@@ -865,7 +830,6 @@ if (scrollProgress) {
 
         subsEl.innerHTML = goal.programs.map((p, i) => `
             <div class="prog-sub-card${i === 0 ? ' active' : ''}${isMulti ? '' : ' prog-sub-card--solo'}" data-sub="${i}">
-                <div class="prog-sub-goal">${goal.name}</div>
                 <div class="prog-sub-name">${p.name}</div>
                 <div class="prog-sub-kcal">${p.kcal}</div>
             </div>`).join('');
@@ -892,4 +856,10 @@ if (scrollProgress) {
     });
 
     selectGoal(0);
+})();
+
+/* Год в футере — обновляется автоматически */
+(function() {
+    const el = document.getElementById('footerYear');
+    if (el) el.textContent = new Date().getFullYear();
 })();
