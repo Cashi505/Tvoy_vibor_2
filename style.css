@@ -2679,6 +2679,14 @@ body::after { opacity: 0.062; }
     transition: transform 0.3s var(--ease);
 }
 .dish-gallery-item:hover .dish-gallery-label { transform: translateY(0); }
+.dish-gallery-heading {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 1.1rem;
+}
 .dish-gallery-note {
     text-align: center;
     font-size: 0.78rem;
@@ -2761,33 +2769,36 @@ body::after { opacity: 0.062; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.12rem;
-    padding: 0.65rem 1.4rem;
-    border: 1.5px solid var(--border-gold);
+    gap: 0.18rem;
+    padding: 0.85rem 1.85rem;
+    border: 2px solid rgba(0,0,0,0.18);
     border-radius: 50px;
-    background: transparent;
+    background: #FFFFFF;
     cursor: pointer;
     transition: all 0.25s var(--ease);
     font-family: var(--font-body);
     text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
 .prog-goal:hover {
     border-color: var(--green);
-    background: rgba(36,180,98,0.06);
+    background: #FFFFFF;
+    box-shadow: 0 2px 12px rgba(36,180,98,0.18);
 }
 .prog-goal.active {
     background: var(--green);
     border-color: var(--green);
+    box-shadow: 0 4px 18px rgba(36,180,98,0.35);
 }
 .prog-goal-title {
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text-primary);
     transition: color 0.25s;
     line-height: 1.2;
 }
 .prog-goal-sub {
-    font-size: 0.63rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     transition: color 0.25s;
     line-height: 1;
@@ -2814,7 +2825,7 @@ body::after { opacity: 0.062; }
 .prog-panel-left { display: flex; flex-direction: column; }
 .prog-panel-photo {
     position: relative;
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -2891,119 +2902,193 @@ body::after { opacity: 0.062; }
     border-left: 1px solid var(--border);
 }
 /* Step labels */
-.prog-step-wrap { margin-bottom: 1.3rem; }
+.prog-step-wrap { margin-bottom: 1.5rem; }
 .prog-step-label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0 0 0.9rem;
+    letter-spacing: 0;
 }
-.prog-step-label span { color: var(--green); font-weight: 700; }
+.prog-step-label span {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-right: 0.25rem;
+}
 
 /* ── Step 2: sub-programs ── */
 .prog-subs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .prog-sub-card {
-    border: 1.5px solid var(--border);
+    border: 2px solid rgba(0,0,0,0.14);
     border-radius: var(--radius);
-    padding: 0.75rem 1.2rem;
+    padding: 0.9rem 1.4rem;
     cursor: pointer;
     transition: all 0.22s var(--ease);
     background: #FFFFFF;
-    min-width: 155px;
+    min-width: 170px;
     text-align: left;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 .prog-sub-card:hover { border-color: var(--green); }
-.prog-sub-card.active { border-color: var(--green); background: rgba(36,180,98,0.06); }
-.prog-sub-cat { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.15rem; }
-.prog-sub-name { font-size: 0.88rem; font-weight: 700; color: var(--green); line-height: 1.2; margin-bottom: 0.1rem; }
-.prog-sub-kcal { font-size: 0.7rem; color: var(--text-muted); }
+.prog-sub-card--solo { cursor: default; }
+.prog-sub-card.active {
+    border-color: var(--green);
+    background: var(--green);
+    box-shadow: 0 4px 16px rgba(36,180,98,0.3);
+}
+.prog-sub-goal {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    transition: color 0.22s;
+}
+.prog-sub-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1.2;
+    margin-bottom: 0.15rem;
+    transition: color 0.22s;
+}
+.prog-sub-kcal { font-size: 0.75rem; color: var(--text-muted); transition: color 0.22s; }
 
-/* ── Duration cards (horizontal scroll) ── */
+.prog-sub-card.active .prog-sub-goal { color: rgba(255,255,255,0.7); }
+.prog-sub-card.active .prog-sub-name { color: #FFFFFF; }
+.prog-sub-card.active .prog-sub-kcal { color: rgba(255,255,255,0.8); }
+
+/* ── Duration cards (horizontal scroll, равная ширина) ── */
 .prog-durations {
-    display: flex;
-    gap: 0.55rem;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(110px, 1fr);
+    gap: 0.6rem;
     overflow-x: auto;
     scrollbar-width: none;
-    padding: 0.25rem 0.1rem 0.5rem;
+    padding: 0.3rem 0.1rem 0.6rem;
 }
 .prog-durations::-webkit-scrollbar { display: none; }
 .dur-card {
-    flex: 0 0 auto;
-    min-width: 85px;
-    border: 1.5px solid var(--border);
+    /* Одинаковая ширина через grid-auto-columns — не трогать flex тут */
+    border: 2px solid rgba(0,0,0,0.16);
     border-radius: var(--radius);
-    padding: 0.7rem 0.65rem;
+    padding: 1rem 0.75rem;
     cursor: pointer;
     transition: all 0.2s var(--ease);
     background: #FFFFFF;
     text-align: center;
     position: relative;
-    text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.12rem;
+    gap: 0.18rem;
     color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
-.dur-card:hover { border-color: var(--green); background: rgba(36,180,98,0.04); }
-.dur-card.active { background: var(--green); border-color: var(--green); color: #FFFFFF; }
-.dur-card-label { font-size: 0.68rem; font-weight: 700; line-height: 1.2; color: inherit; }
-.dur-card-bonus { font-size: 0.57rem; color: var(--green); font-weight: 600; }
-.dur-card.active .dur-card-bonus { color: rgba(255,255,255,0.85); }
-.dur-card-old { font-size: 0.57rem; text-decoration: line-through; opacity: 0.45; color: inherit; }
+.dur-card:hover {
+    border-color: var(--green);
+    border-width: 2px;
+    background: rgba(36,180,98,0.04);
+    box-shadow: 0 2px 10px rgba(36,180,98,0.15);
+}
+.dur-card.active {
+    background: var(--green);
+    border-color: var(--green);
+    border-width: 2.5px;
+    color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(36,180,98,0.35);
+}
+.dur-card-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: inherit;
+}
+.dur-card-old {
+    font-size: 0.68rem;
+    text-decoration: line-through;
+    opacity: 0.5;
+    color: inherit;
+}
 .dur-card-price {
     font-family: var(--font-display);
-    font-size: 1.15rem;
+    font-size: 1.35rem;
     font-weight: 700;
     line-height: 1;
     color: inherit;
-    margin-top: 0.18rem;
+    margin-top: 0.2rem;
 }
-.dur-card-per { font-size: 0.55rem; opacity: 0.68; color: inherit; line-height: 1.3; }
+.dur-card-per {
+    font-size: 0.67rem;
+    opacity: 0.72;
+    color: inherit;
+    line-height: 1.3;
+}
 .dur-badge {
     position: absolute;
-    top: -9px; right: -6px;
-    font-size: 0.52rem;
+    top: -10px; right: -7px;
+    font-size: 0.58rem;
     font-weight: 700;
     color: #FFFFFF;
     background: #E85D0A;
-    padding: 0.14rem 0.38rem;
+    padding: 0.16rem 0.42rem;
     border-radius: 50px;
     white-space: nowrap;
 }
-.dur-card.active .dur-badge { background: rgba(0,0,0,0.22); }
-.dur-card-discount { font-size: 0.52rem; font-weight: 700; color: #E85D0A; }
+.dur-card.active .dur-badge { background: rgba(0,0,0,0.25); }
+.dur-card-discount { font-size: 0.62rem; font-weight: 700; color: #E85D0A; }
 .dur-card.active .dur-card-discount { color: rgba(255,255,255,0.9); }
 
 /* ИТОГО */
 .prog-total {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
     text-align: center;
-    padding: 0.85rem 0 0.15rem;
+    padding: 1rem 0 0.2rem;
     border-top: 1px solid var(--border);
 }
 .prog-total span {
     color: var(--green);
     font-family: var(--font-display);
-    font-size: 1.35rem;
+    font-size: 1.6rem;
     font-weight: 700;
 }
 
 /* CTA */
-.prog-order-btn { width: 100%; text-align: center; padding: 0.9rem; font-size: 0.95rem; }
+.prog-order-btn { width: 100%; text-align: center; padding: 1rem; font-size: 1rem; }
 
 /* Responsive */
 @media (max-width: 960px) {
     .prog-panel { grid-template-columns: 1fr; }
     .prog-panel-right { padding: 1.5rem; border-left: none; border-top: 1px solid var(--border); }
-    .prog-panel-photo { aspect-ratio: 16/7; }
+    .prog-panel-photo { aspect-ratio: 4/3; }
 }
 @media (max-width: 640px) {
-    .prog-goals { gap: 0.42rem; }
-    .prog-goal { padding: 0.5rem 0.8rem; }
-    .prog-goal-title { font-size: 0.76rem; }
-    .prog-goal-sub { font-size: 0.57rem; }
-    .dur-card { min-width: 76px; padding: 0.62rem 0.55rem; }
-    .dur-card-price { font-size: 1rem; }
+    /* Шаг 1 — 2 кнопки в ряд (2×2 сетка) */
+    .prog-goals {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .prog-goal { padding: 0.65rem 0.7rem; width: 100%; }
+    .prog-goal-title { font-size: 0.8rem; }
+    .prog-goal-sub { font-size: 0.6rem; }
+    /* Шаг 3 — компактные плитки */
+    .prog-panel-right { padding: 1.1rem 0.9rem; gap: 0.7rem; }
+    .prog-step-wrap { margin-bottom: 0.9rem; }
+    .prog-step-label { font-size: 0.9rem; margin-bottom: 0.65rem; }
+    .prog-durations { grid-auto-columns: minmax(78px, 1fr); gap: 0.3rem; padding: 0.15rem 0.05rem 0.4rem; }
+    .dur-card { padding: 0.55rem 0.35rem; gap: 0.12rem; }
+    .dur-card-price { font-size: 1rem; margin-top: 0.12rem; }
+    .dur-card-label { font-size: 0.67rem; }
+    .dur-card-per { font-size: 0.56rem; }
+    .dur-card-old { font-size: 0.56rem; }
+    .dur-card-discount { font-size: 0.52rem; }
+    .dur-badge { font-size: 0.48rem; padding: 0.12rem 0.3rem; top: 0.2rem; right: 0.2rem; }
 }

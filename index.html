@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Твой Выбор - Доставка правильного питания</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preload" as="image" href="images/menu/tuna-salad.jpeg">
+    <link rel="preload" as="image" href="images/menu/chicken-breast.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -294,7 +296,8 @@
             <div class="prog-panel reveal-up delay-2">
                 <div class="prog-panel-left">
                     <div class="prog-panel-photo">
-                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt="">
+                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt=""
+                             onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.dataset.fallback||'images/menu/tuna-salad.jpeg'}">
                         <span class="prog-panel-photo-label" id="progTag">Снижение веса</span>
                     </div>
                     <div class="prog-panel-meta">
@@ -311,7 +314,7 @@
                     <p class="prog-step-label"><span>Шаг 3.</span> Выберите срок доставки</p>
                     <div class="prog-durations" id="progDurations"></div>
                     <div class="prog-total">ИТОГО: <span id="progTotal">790 ₽</span></div>
-                    <a href="#order" class="btn btn-primary prog-order-btn">Оформить заказ</a>
+                    <a href="#order" class="btn btn-primary prog-order-btn">Заказать программу</a>
                 </div>
             </div>
         </div>
@@ -467,13 +470,14 @@
 
             <!-- Dish gallery — always visible -->
             <div class="dish-gallery reveal-up delay-1">
+                <p class="dish-gallery-heading">Примеры блюд из рациона</p>
                 <div class="dish-gallery-grid">
                     <div class="dish-gallery-item">
-                        <img src="images/menu/tuna-salad.jpeg" alt="Тунец с салатом" loading="lazy">
+                        <img src="images/menu/tuna-salad.jpeg" alt="Тунец с салатом" fetchpriority="high">
                         <div class="dish-gallery-label">Салат с тунцом</div>
                     </div>
                     <div class="dish-gallery-item">
-                        <img src="images/menu/chicken-breast.jpeg" alt="Куриная грудка" loading="lazy">
+                        <img src="images/menu/chicken-breast.jpeg" alt="Куриная грудка" fetchpriority="high">
                         <div class="dish-gallery-label">Куриная грудка</div>
                     </div>
                     <div class="dish-gallery-item">

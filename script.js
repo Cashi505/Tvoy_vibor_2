@@ -694,10 +694,11 @@ if (scrollProgress) {
     const GOALS = [
         {
             name: 'Снижение веса', sub: 'от 900 ккал',
+            photo: 'images/people/weight-loss.jpg',
+            fallback: 'images/menu/tuna-salad.jpeg',
             programs: [
                 {
                     name: 'Экспресс фигура', kcal: '900 ккал / день', tag: 'Снижение веса',
-                    photo: 'images/menu/tuna-salad.jpeg',
                     desc: 'Дефицит калорий с высоким содержанием белка. Минус 2 кг в неделю без чувства голода.',
                     perks: ['Расчёт по вашему КБЖУ', 'Контроль порций', 'Без чувства голода'],
                     prices: [
@@ -711,7 +712,6 @@ if (scrollProgress) {
                 },
                 {
                     name: 'Коррекция фигуры', kcal: '1 400 ккал / день', tag: 'Снижение веса',
-                    photo: 'images/menu/chicken-breast.jpeg',
                     desc: 'Более мягкое снижение веса с хорошей сытостью. Подходит при активном образе жизни.',
                     perks: ['Полноценные 4-5 приёмов', 'Без срывов', 'Долгосрочный результат'],
                     prices: [
@@ -726,10 +726,11 @@ if (scrollProgress) {
         },
         {
             name: 'Не хочу готовить', sub: 'от 1 200 ккал',
+            photo: 'images/people/no-cooking.jpg',
+            fallback: 'images/menu/oatmeal-berries.jpeg',
             programs: [
                 {
                     name: '3 разовое питание', kcal: '1 200 ккал / день', tag: 'Не хочу готовить',
-                    photo: 'images/menu/oatmeal-berries.jpeg',
                     desc: 'Завтрак, обед и ужин от наших поваров каждый день. Просто, вкусно, удобно.',
                     perks: ['3 приёма пищи в день', 'Разнообразное меню', 'Без готовки'],
                     prices: [
@@ -744,10 +745,11 @@ if (scrollProgress) {
         },
         {
             name: 'Баланс', sub: 'от 1 800 ккал',
+            photo: 'images/people/balance.jpg',
+            fallback: 'images/menu/chicken-breast.jpeg',
             programs: [
                 {
                     name: 'Будь в форме', kcal: '1 800 ккал / день', tag: 'Баланс',
-                    photo: 'images/menu/chicken-breast.jpeg',
                     desc: 'Идеальный баланс белков, жиров и углеводов для активного образа жизни каждый день.',
                     perks: ['Подходит большинству', '4-5 приёмов пищи', 'Для спортивного режима'],
                     prices: [
@@ -760,7 +762,6 @@ if (scrollProgress) {
                 },
                 {
                     name: 'Всегда в форме', kcal: '2 200 ккал / день', tag: 'Баланс',
-                    photo: 'images/menu/beef-steak.jpeg',
                     desc: 'Усиленный рацион для тех, кто активно тренируется и хочет поддерживать хорошую форму.',
                     perks: ['Увеличенный объём', 'Для активных людей', 'Разнообразные блюда'],
                     prices: [
@@ -775,10 +776,11 @@ if (scrollProgress) {
         },
         {
             name: 'Набор массы', sub: 'от 3 000 ккал',
+            photo: 'images/people/mass-gain.jpg',
+            fallback: 'images/menu/beef-steak.jpeg',
             programs: [
                 {
                     name: 'Масса', kcal: '3 000 ккал / день', tag: 'Набор массы',
-                    photo: 'images/menu/beef-steak.jpeg',
                     desc: 'Профицит калорий с максимальным содержанием белка для роста мышц и силы.',
                     perks: ['Для спортсменов', 'Высокий % белка', 'Комплексные углеводы'],
                     prices: [
@@ -818,7 +820,7 @@ if (scrollProgress) {
             <div class="dur-card${i === 0 ? ' active' : ''}" data-price="${pr.price}">
                 ${badge}
                 <div class="dur-card-label">${pr.label}</div>
-                ${pr.oldPrice ? `<div class="dur-card-old">${fmt(pr.oldPrice)}</div>` : ''}
+                <div class="dur-card-old"${pr.oldPrice ? '' : ' style="visibility:hidden"'}>${pr.oldPrice ? fmt(pr.oldPrice) : ' '}</div>
                 <div class="dur-card-price">${fmt(pr.price)}</div>
                 <div class="dur-card-per">${fmt(pr.perDay)} / день</div>
                 ${pr.discountPct ? `<div class="dur-card-discount">-${pr.discountPct}%</div>` : ''}
@@ -839,12 +841,10 @@ if (scrollProgress) {
     function renderProg(prog) {
         panel.classList.add('prog-panel--fading');
         setTimeout(() => {
-            photoEl.src = prog.photo;
-            photoEl.alt = prog.name;
-            tagEl.textContent = prog.tag;
+            tagEl.textContent  = prog.tag;
             kcalEl.textContent = prog.kcal;
             descEl.textContent = prog.desc;
-            perksEl.innerHTML = prog.perks.map(t => `<li>${t}</li>`).join('');
+            perksEl.innerHTML  = prog.perks.map(t => `<li>${t}</li>`).join('');
             renderDurations(prog);
             panel.classList.remove('prog-panel--fading');
         }, 180);
@@ -852,16 +852,25 @@ if (scrollProgress) {
 
     function selectGoal(goalIdx) {
         const goal = GOALS[goalIdx];
-        const hasMultiple = goal.programs.length > 1;
 
-        if (hasMultiple) {
-            step2.style.display = '';
-            subsEl.innerHTML = goal.programs.map((p, i) => `
-                <div class="prog-sub-card${i === 0 ? ' active' : ''}" data-sub="${i}">
-                    <div class="prog-sub-name">${p.name}</div>
-                    <div class="prog-sub-kcal">${p.kcal}</div>
-                </div>`).join('');
+        /* Фото меняется только при смене цели (Шаг 1) */
+        delete photoEl.dataset.fb;
+        photoEl.dataset.fallback = goal.fallback || '';
+        photoEl.src = goal.photo;
+        photoEl.alt = goal.name;
 
+        /* Шаг 2 — всегда виден, даже если программа одна */
+        step2.style.display = '';
+        const isMulti = goal.programs.length > 1;
+
+        subsEl.innerHTML = goal.programs.map((p, i) => `
+            <div class="prog-sub-card${i === 0 ? ' active' : ''}${isMulti ? '' : ' prog-sub-card--solo'}" data-sub="${i}">
+                <div class="prog-sub-goal">${goal.name}</div>
+                <div class="prog-sub-name">${p.name}</div>
+                <div class="prog-sub-kcal">${p.kcal}</div>
+            </div>`).join('');
+
+        if (isMulti) {
             subsEl.querySelectorAll('.prog-sub-card').forEach(card => {
                 card.addEventListener('click', () => {
                     subsEl.querySelectorAll('.prog-sub-card').forEach(c => c.classList.remove('active'));
@@ -869,8 +878,6 @@ if (scrollProgress) {
                     renderProg(goal.programs[+card.dataset.sub]);
                 });
             });
-        } else {
-            step2.style.display = 'none';
         }
 
         renderProg(goal.programs[0]);
