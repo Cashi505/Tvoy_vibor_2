@@ -1046,9 +1046,9 @@ em { font-style: italic; }
     .sched-card-img { height: 148px; }
 }
 @media (max-width: 640px) {
-    .sched-programs { gap: 0.35rem; }
-    .sched-prog { padding: 0.5rem 0.85rem; }
-    .sched-prog-name { font-size: 0.78rem; }
+    .sched-programs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem; }
+    .sched-prog { padding: 0.5rem 0.5rem; width: 100%; }
+    .sched-prog-name { font-size: 0.78rem; white-space: normal; text-align: center; }
     .sched-day { min-width: 52px; padding: 0.42rem 0.5rem; }
     .day-name { font-size: 0.73rem; }
     .day-date { font-size: 0.56rem; }
@@ -3056,4 +3056,197 @@ body::after { opacity: 0.062; }
     .dur-card-old { font-size: 0.56rem; }
     .dur-card-discount { font-size: 0.52rem; }
     .dur-badge { font-size: 0.48rem; padding: 0.12rem 0.3rem; top: 0.2rem; right: 0.2rem; }
+}
+
+/* ============================================
+   STICKY ORDER BAR
+   ============================================ */
+.sticky-order-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 900;
+    background: #0E1B12;
+    border-top: 2px solid var(--green);
+    padding: 0.7rem 0;
+    transform: translateY(100%);
+    transition: transform 0.35s var(--ease);
+    display: none; /* desktop only */
+}
+@media (min-width: 641px) {
+    .sticky-order-bar { display: block; }
+}
+.sticky-order-bar.visible { transform: translateY(0); }
+.sticky-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.sticky-bar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    flex: 1;
+    min-width: 0;
+}
+.sticky-bar-goal {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sticky-bar-kcal {
+    font-size: 0.75rem;
+    color: var(--green-light);
+}
+.sticky-bar-price-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.05rem;
+    flex-shrink: 0;
+}
+.sticky-bar-days {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+}
+.sticky-bar-total {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+}
+.sticky-bar-btn {
+    flex-shrink: 0;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   GIFT CERTIFICATE
+   ============================================ */
+.gift-cert {
+    background: var(--bg-section);
+    padding: clamp(2.5rem, 5vw, 5rem) 0;
+}
+.gift-cert-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.gift-cert-left .section-eyebrow { margin-bottom: 0.5rem; }
+.gift-cert-left .section-title { margin-bottom: 1rem; }
+.gift-cert-text {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    max-width: 42ch;
+}
+.gift-cert-perks {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.gift-cert-perks li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.gift-cert-perks li::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+}
+.gift-cert-right {
+    display: flex;
+    justify-content: center;
+}
+.gift-card-visual {
+    background: linear-gradient(135deg, #1C3828 0%, #0E1B12 60%, #24B462 100%);
+    border-radius: 20px;
+    padding: 2rem 2.2rem;
+    width: 340px;
+    max-width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(47,200,110,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.gift-card-visual::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(47,200,110,0.12);
+}
+.gift-card-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(47,200,110,0.08);
+}
+.gift-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.gift-card-logo-img {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+}
+.gift-card-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    background: rgba(47,200,110,0.15);
+    padding: 0.25rem 0.6rem;
+    border-radius: 50px;
+    border: 1px solid rgba(47,200,110,0.3);
+}
+.gift-card-amount {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    position: relative;
+    z-index: 1;
+}
+.gift-card-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+.gift-card-cities {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    position: relative;
+    z-index: 1;
+}
+@media (max-width: 768px) {
+    .gift-cert-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .gift-card-visual { width: 100%; }
 }

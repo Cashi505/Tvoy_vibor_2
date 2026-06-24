@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -31,8 +31,8 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#programs" class="nav-link">Программы</a></li>
                 <li><a href="#how" class="nav-link">Как работаем</a></li>
-                <li><a href="#calculator" class="nav-link">Калькулятор</a></li>
                 <li><a href="#menu" class="nav-link">Меню</a></li>
+                <li><a href="#calculator" class="nav-link">Калькулятор</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li><a href="#contacts" class="nav-link">Контакты</a></li>
             </ul>
@@ -89,6 +89,72 @@
             <span class="ticker-item">Готово за 3 минуты <span class="ticker-dot">◆</span></span>
         </div>
     </div>
+
+
+    <!-- PROGRAMS -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <div class="section-eyebrow">Программы питания</div>
+                <h2 class="section-title">Выберите <em>свою программу</em></h2>
+            </div>
+
+            <!-- ШАГ 1: цель -->
+            <div class="prog-step-wrap reveal-up delay-1">
+                <p class="prog-step-label"><span>Шаг 1.</span> Выберите свою цель</p>
+                <div class="prog-goals">
+                    <button class="prog-goal active" data-goal="0">
+                        <span class="prog-goal-title">Снижение веса</span>
+                        <span class="prog-goal-sub">от 900 ккал</span>
+                    </button>
+                    <button class="prog-goal" data-goal="1">
+                        <span class="prog-goal-title">Не хочу готовить</span>
+                        <span class="prog-goal-sub">от 1 200 ккал</span>
+                    </button>
+                    <button class="prog-goal" data-goal="2">
+                        <span class="prog-goal-title">Баланс</span>
+                        <span class="prog-goal-sub">от 1 800 ккал</span>
+                    </button>
+                    <button class="prog-goal" data-goal="3">
+                        <span class="prog-goal-title">Набор массы</span>
+                        <span class="prog-goal-sub">от 3 000 ккал</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ШАГ 2: программа (появляется когда у цели 2+ программы) -->
+            <div class="prog-step-wrap" id="progStep2" style="display:none">
+                <p class="prog-step-label"><span>Шаг 2.</span> Выберите программу питания</p>
+                <div class="prog-subs" id="progSubs"></div>
+            </div>
+
+            <!-- ШАГ 3: детали + сроки + цены -->
+            <div class="prog-panel reveal-up delay-2">
+                <div class="prog-panel-left">
+                    <div class="prog-panel-photo">
+                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt=""
+                             onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.dataset.fallback||'images/menu/tuna-salad.jpeg'}">
+                        <span class="prog-panel-photo-label" id="progTag">Снижение веса</span>
+                    </div>
+                    <div class="prog-panel-meta">
+                        <div class="prog-panel-kcal" id="progKcal">900 ккал / день</div>
+                        <p class="prog-panel-desc" id="progDesc">Дефицит калорий с высоким содержанием белка. Минус 2 кг в неделю без чувства голода.</p>
+                        <ul class="prog-panel-perks" id="progPerks">
+                            <li>Расчёт по вашему КБЖУ</li>
+                            <li>Контроль порций</li>
+                            <li>Без чувства голода</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="prog-panel-right">
+                    <p class="prog-step-label"><span>Шаг 3.</span> Выберите срок доставки</p>
+                    <div class="prog-durations" id="progDurations"></div>
+                    <div class="prog-total">ИТОГО: <span id="progTotal">790 ₽</span></div>
+                    <a href="#order" class="btn btn-primary prog-order-btn">Заказать программу</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- STATS -->
     <section class="stats" id="stats">
@@ -183,33 +249,6 @@
         </div>
     </section>
 
-    <!-- MONUMENTAL STRIP -->
-    <div class="mono-strip">
-        <div class="container">
-            <div class="mono-strip-inner">
-                <div class="mono-item">
-                    <span class="mono-num">500<sup>+</sup></span>
-                    <span class="mono-label">клиентов</span>
-                </div>
-                <div class="mono-sep"></div>
-                <div class="mono-item">
-                    <span class="mono-num">200<sup>+</sup></span>
-                    <span class="mono-label">блюд в меню</span>
-                </div>
-                <div class="mono-sep"></div>
-                <div class="mono-item">
-                    <span class="mono-num">2<sup>кг</sup></span>
-                    <span class="mono-label">в среднем за неделю</span>
-                </div>
-                <div class="mono-sep"></div>
-                <div class="mono-item">
-                    <span class="mono-num">0</span>
-                    <span class="mono-label">повторов за 4 недели</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- HOW IT WORKS -->
     <section class="how" id="how">
         <div class="container">
@@ -261,72 +300,107 @@
                 </div>
             </div>
         </div>
-    </section>
+    
 
-    <!-- PROGRAMS -->
-    <section class="programs" id="programs">
+    <!-- MENU / SCHEDULE -->
+    <section class="sched-section" id="menu">
         <div class="container">
             <div class="section-header reveal-up">
-                <div class="section-eyebrow">Программы питания</div>
-                <h2 class="section-title">Выберите <em>свою программу</em></h2>
+                <h2 class="section-title">Меню <em>на неделю</em></h2>
+                <p class="section-sub">Выберите программу — и увидите точное расписание питания на каждый день</p>
             </div>
 
-            <!-- ШАГ 1: цель -->
-            <div class="prog-step-wrap reveal-up delay-1">
-                <p class="prog-step-label"><span>Шаг 1.</span> Выберите свою цель</p>
-                <div class="prog-goals">
-                    <button class="prog-goal active" data-goal="0">
-                        <span class="prog-goal-title">Снижение веса</span>
-                        <span class="prog-goal-sub">от 900 ккал</span>
-                    </button>
-                    <button class="prog-goal" data-goal="1">
-                        <span class="prog-goal-title">Не хочу готовить</span>
-                        <span class="prog-goal-sub">от 1 200 ккал</span>
-                    </button>
-                    <button class="prog-goal" data-goal="2">
-                        <span class="prog-goal-title">Баланс</span>
-                        <span class="prog-goal-sub">от 1 800 ккал</span>
-                    </button>
-                    <button class="prog-goal" data-goal="3">
-                        <span class="prog-goal-title">Набор массы</span>
-                        <span class="prog-goal-sub">от 3 000 ккал</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- ШАГ 2: программа (появляется когда у цели 2+ программы) -->
-            <div class="prog-step-wrap" id="progStep2" style="display:none">
-                <p class="prog-step-label"><span>Шаг 2.</span> Выберите программу питания</p>
-                <div class="prog-subs" id="progSubs"></div>
-            </div>
-
-            <!-- ШАГ 3: детали + сроки + цены -->
-            <div class="prog-panel reveal-up delay-2">
-                <div class="prog-panel-left">
-                    <div class="prog-panel-photo">
-                        <img id="progPhoto" src="images/menu/tuna-salad.jpeg" alt=""
-                             onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.dataset.fallback||'images/menu/tuna-salad.jpeg'}">
-                        <span class="prog-panel-photo-label" id="progTag">Снижение веса</span>
+            <!-- Dish gallery — always visible -->
+            <div class="dish-gallery reveal-up delay-1">
+                <p class="dish-gallery-heading">Примеры блюд из рациона</p>
+                <div class="dish-gallery-grid">
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/tuna-salad.jpeg" alt="Тунец с салатом" fetchpriority="high">
+                        <div class="dish-gallery-label">Салат с тунцом</div>
                     </div>
-                    <div class="prog-panel-meta">
-                        <div class="prog-panel-kcal" id="progKcal">900 ккал / день</div>
-                        <p class="prog-panel-desc" id="progDesc">Дефицит калорий с высоким содержанием белка. Минус 2 кг в неделю без чувства голода.</p>
-                        <ul class="prog-panel-perks" id="progPerks">
-                            <li>Расчёт по вашему КБЖУ</li>
-                            <li>Контроль порций</li>
-                            <li>Без чувства голода</li>
-                        </ul>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/chicken-breast.jpeg" alt="Куриная грудка" fetchpriority="high">
+                        <div class="dish-gallery-label">Куриная грудка</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/oatmeal-berries.jpeg" alt="Овсяная каша с ягодами" loading="lazy">
+                        <div class="dish-gallery-label">Овсяная каша</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/beef-steak.jpeg" alt="Говяжий стейк" loading="lazy">
+                        <div class="dish-gallery-label">Говяжий стейк</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/chicken-soup.jpeg" alt="Куриный суп" loading="lazy">
+                        <div class="dish-gallery-label">Куриный суп</div>
+                    </div>
+                    <div class="dish-gallery-item">
+                        <img src="images/menu/protein-box.jpeg" alt="Белковый бокс" loading="lazy">
+                        <div class="dish-gallery-label">Белковый бокс</div>
                     </div>
                 </div>
-                <div class="prog-panel-right">
-                    <p class="prog-step-label"><span>Шаг 3.</span> Выберите срок доставки</p>
-                    <div class="prog-durations" id="progDurations"></div>
-                    <div class="prog-total">ИТОГО: <span id="progTotal">790 ₽</span></div>
-                    <a href="#order" class="btn btn-primary prog-order-btn">Заказать программу</a>
-                </div>
+                <p class="dish-gallery-note">Более 200 блюд в ротации - каждые 4 недели меняется всё меню</p>
+            </div>
+
+            <!-- Program selector -->
+            <div class="sched-programs reveal-up delay-1">
+                <button class="sched-prog active" data-prog="0">
+                    <span class="sched-prog-name">Похудение</span>
+                    <span class="sched-prog-kcal">900 ккал/день</span>
+                </button>
+                <button class="sched-prog" data-prog="1">
+                    <span class="sched-prog-name">Поддержание</span>
+                    <span class="sched-prog-kcal">1200 ккал/день</span>
+                </button>
+                <button class="sched-prog" data-prog="2">
+                    <span class="sched-prog-name">Сбалансированное</span>
+                    <span class="sched-prog-kcal">1800 ккал/день</span>
+                </button>
+                <button class="sched-prog" data-prog="3">
+                    <span class="sched-prog-name">Набор массы</span>
+                    <span class="sched-prog-kcal">2500 ккал/день</span>
+                </button>
+                <button class="sched-prog" data-prog="4">
+                    <span class="sched-prog-name">Как дома</span>
+                    <span class="sched-prog-kcal">3000 ккал/день</span>
+                </button>
+            </div>
+
+            <!-- Day selector (pre-populated; JS overwrites with real dates when loaded) -->
+            <div class="sched-days reveal-up delay-2">
+                <button class="sched-day active" data-day="0"><span class="day-name">Пн</span></button>
+                <button class="sched-day" data-day="1"><span class="day-name">Вт</span></button>
+                <button class="sched-day" data-day="2"><span class="day-name">Ср</span></button>
+                <button class="sched-day" data-day="3"><span class="day-name">Чт</span></button>
+                <button class="sched-day" data-day="4"><span class="day-name">Пт</span></button>
+                <button class="sched-day" data-day="5"><span class="day-name">Сб</span></button>
+            </div>
+
+            <!-- Daily summary bar (populated by JS) -->
+            <div class="sched-summary reveal-up delay-3" id="schedSummary"></div>
+
+            <!-- Meal grid + carousel arrows overlaid on photo (mobile) -->
+            <div class="sched-carousel-wrap">
+                <div class="sched-grid" id="schedGrid"></div>
+                <button class="sched-carousel-btn" id="schedPrev" aria-label="Предыдущее блюдо" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="sched-carousel-btn" id="schedNext" aria-label="Следующее блюдо">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+            <!-- Counter label (mobile only) -->
+            <div class="sched-carousel-nav" id="schedCarouselNav">
+                <span class="sched-carousel-counter" id="schedCounter"></span>
+            </div>
+
+            <!-- Footer -->
+            <div class="sched-footer reveal-up">
+                <p class="sched-footer-note">Меню составляется индивидуально нутрициологом и обновляется каждые 4 недели</p>
+                <a href="#order" class="btn btn-primary btn-large">Попробовать программу</a>
             </div>
         </div>
-    </section>
+    </section></section>
 
     <!-- RESULTS / TESTIMONIALS -->
     <section class="results" id="results">
@@ -467,106 +541,36 @@
             </div>
         </div>
     </section>
-
-    <!-- MENU / SCHEDULE -->
-    <section class="sched-section" id="menu">
+    <!-- GIFT CERTIFICATE -->
+    <section class="gift-cert" id="gift">
         <div class="container">
-            <div class="section-header reveal-up">
-                <h2 class="section-title">Меню <em>на неделю</em></h2>
-                <p class="section-sub">Выберите программу — и увидите точное расписание питания на каждый день</p>
-            </div>
-
-            <!-- Dish gallery — always visible -->
-            <div class="dish-gallery reveal-up delay-1">
-                <p class="dish-gallery-heading">Примеры блюд из рациона</p>
-                <div class="dish-gallery-grid">
-                    <div class="dish-gallery-item">
-                        <img src="images/menu/tuna-salad.jpeg" alt="Тунец с салатом" fetchpriority="high">
-                        <div class="dish-gallery-label">Салат с тунцом</div>
-                    </div>
-                    <div class="dish-gallery-item">
-                        <img src="images/menu/chicken-breast.jpeg" alt="Куриная грудка" fetchpriority="high">
-                        <div class="dish-gallery-label">Куриная грудка</div>
-                    </div>
-                    <div class="dish-gallery-item">
-                        <img src="images/menu/oatmeal-berries.jpeg" alt="Овсяная каша с ягодами" loading="lazy">
-                        <div class="dish-gallery-label">Овсяная каша</div>
-                    </div>
-                    <div class="dish-gallery-item">
-                        <img src="images/menu/beef-steak.jpeg" alt="Говяжий стейк" loading="lazy">
-                        <div class="dish-gallery-label">Говяжий стейк</div>
-                    </div>
-                    <div class="dish-gallery-item">
-                        <img src="images/menu/chicken-soup.jpeg" alt="Куриный суп" loading="lazy">
-                        <div class="dish-gallery-label">Куриный суп</div>
-                    </div>
-                    <div class="dish-gallery-item">
-                        <img src="images/menu/protein-box.jpeg" alt="Белковый бокс" loading="lazy">
-                        <div class="dish-gallery-label">Белковый бокс</div>
+            <div class="gift-cert-inner reveal-up">
+                <div class="gift-cert-left">
+                    <div class="section-eyebrow">Подарок близким</div>
+                    <h2 class="section-title">Подари заботу<br><em>о здоровье</em></h2>
+                    <p class="gift-cert-text">Подарочный сертификат на любую программу питания. Идеальный подарок для тех, кто хочет начать, но не решается. Оформляем за 5 минут.</p>
+                    <ul class="gift-cert-perks">
+                        <li>Любой номинал от 1 250 ₽</li>
+                        <li>Действует 3 месяца</li>
+                        <li>Отправим в мессенджер сразу</li>
+                    </ul>
+                    <a href="#order" class="btn btn-primary">Оформить сертификат</a>
+                </div>
+                <div class="gift-cert-right">
+                    <div class="gift-card-visual">
+                        <div class="gift-card-top">
+                            <img src="images/logo.png" alt="Твой Выбор" class="gift-card-logo-img">
+                            <span class="gift-card-badge">Подарочный сертификат</span>
+                        </div>
+                        <div class="gift-card-amount">от 1 250 ₽</div>
+                        <div class="gift-card-sub">на программу питания<br>любой продолжительности</div>
+                        <div class="gift-card-cities">Сургут · Нефтеюганск</div>
                     </div>
                 </div>
-                <p class="dish-gallery-note">Более 200 блюд в ротации - каждые 4 недели меняется всё меню</p>
-            </div>
-
-            <!-- Program selector -->
-            <div class="sched-programs reveal-up delay-1">
-                <button class="sched-prog active" data-prog="0">
-                    <span class="sched-prog-name">Похудение</span>
-                    <span class="sched-prog-kcal">900 ккал/день</span>
-                </button>
-                <button class="sched-prog" data-prog="1">
-                    <span class="sched-prog-name">Поддержание</span>
-                    <span class="sched-prog-kcal">1200 ккал/день</span>
-                </button>
-                <button class="sched-prog" data-prog="2">
-                    <span class="sched-prog-name">Сбалансированное</span>
-                    <span class="sched-prog-kcal">1800 ккал/день</span>
-                </button>
-                <button class="sched-prog" data-prog="3">
-                    <span class="sched-prog-name">Набор массы</span>
-                    <span class="sched-prog-kcal">2500 ккал/день</span>
-                </button>
-                <button class="sched-prog" data-prog="4">
-                    <span class="sched-prog-name">Как дома</span>
-                    <span class="sched-prog-kcal">3000 ккал/день</span>
-                </button>
-            </div>
-
-            <!-- Day selector (pre-populated; JS overwrites with real dates when loaded) -->
-            <div class="sched-days reveal-up delay-2">
-                <button class="sched-day active" data-day="0"><span class="day-name">Пн</span></button>
-                <button class="sched-day" data-day="1"><span class="day-name">Вт</span></button>
-                <button class="sched-day" data-day="2"><span class="day-name">Ср</span></button>
-                <button class="sched-day" data-day="3"><span class="day-name">Чт</span></button>
-                <button class="sched-day" data-day="4"><span class="day-name">Пт</span></button>
-                <button class="sched-day" data-day="5"><span class="day-name">Сб</span></button>
-            </div>
-
-            <!-- Daily summary bar (populated by JS) -->
-            <div class="sched-summary reveal-up delay-3" id="schedSummary"></div>
-
-            <!-- Meal grid + carousel arrows overlaid on photo (mobile) -->
-            <div class="sched-carousel-wrap">
-                <div class="sched-grid" id="schedGrid"></div>
-                <button class="sched-carousel-btn" id="schedPrev" aria-label="Предыдущее блюдо" disabled>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <button class="sched-carousel-btn" id="schedNext" aria-label="Следующее блюдо">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                </button>
-            </div>
-            <!-- Counter label (mobile only) -->
-            <div class="sched-carousel-nav" id="schedCarouselNav">
-                <span class="sched-carousel-counter" id="schedCounter"></span>
-            </div>
-
-            <!-- Footer -->
-            <div class="sched-footer reveal-up">
-                <p class="sched-footer-note">Меню составляется индивидуально нутрициологом и обновляется каждые 4 недели</p>
-                <a href="#order" class="btn btn-primary btn-large">Попробовать программу</a>
             </div>
         </div>
     </section>
+
 
     <!-- FAQ -->
     <section class="faq" id="faq">
@@ -804,6 +808,19 @@
         </div>
     </footer>
 
+    <div class="sticky-order-bar" id="stickyOrderBar">
+        <div class="sticky-bar-inner container">
+            <div class="sticky-bar-info">
+                <span class="sticky-bar-goal" id="stickyGoal">Снижение веса</span>
+                <span class="sticky-bar-kcal" id="stickyKcal">900 ккал / день</span>
+            </div>
+            <div class="sticky-bar-price-block">
+                <span class="sticky-bar-days" id="stickyDays">1 день</span>
+                <span class="sticky-bar-total" id="stickyTotal">790 ₽</span>
+            </div>
+            <a href="#order" class="btn btn-primary sticky-bar-btn">Заказать программу</a>
+        </div>
+    </div>
     <div class="mobile-cta-bar" id="mobileCta">
         <a href="#order" class="btn btn-primary">Выбрать программу</a>
         <button class="mobile-cta-close" id="mobileCtaClose" aria-label="Закрыть">×</button>
